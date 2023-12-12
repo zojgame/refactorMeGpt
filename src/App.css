@@ -1,6 +1,8 @@
 #root {
+  padding: 40px 64px;
   width: 100%;
   height: 100vh;
   margin: 0 auto;
   text-align: center;
+  background-color: #343045;
 }

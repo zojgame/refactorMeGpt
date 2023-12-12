@@ -1,20 +1,21 @@
-import SyntaxHighlighter from "react-syntax-highlighter";
-import synthwave84 from "react-syntax-highlighter/dist/esm/styles/prism/synthwave84";
 // import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import "./App.css";
-import { HeaderComponent } from "./components";
+import {
+  HeaderComponent,
+  TerminalComponent,
+  UserPanelComponent,
+} from "./components";
 
 function App() {
-  const codeString = `(num) => {
-                        return num + 1
-        }`;
   return (
-    <>
+    <div className="flex flex-col">
       <HeaderComponent />
-      <SyntaxHighlighter language="javascript" style={synthwave84}>
-        {codeString}
-      </SyntaxHighlighter>
-    </>
+      <UserPanelComponent />
+      <div className="flex h-fit justify-around">
+        <TerminalComponent editable />
+        <TerminalComponent />
+      </div>
+    </div>
   );
 }
 
