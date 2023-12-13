@@ -3,7 +3,7 @@ interface IconWrapperProps {
 }
 
 const IconWrapper = ({ children }: IconWrapperProps) => {
-  return <div className="flex gap-3">{children}</div>;
+  return <div className='flex gap-3'>{children}</div>;
 };
 
 export { IconWrapper };
