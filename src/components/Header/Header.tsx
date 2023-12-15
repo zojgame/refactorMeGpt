@@ -1,27 +1,63 @@
 import { Outlet } from "react-router-dom";
 import { HomeIcon, TimeIcon, IconWrapper } from "@/icons";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+const tabs = [
+  {
+    path: "/main",
+    icon: <HomeIcon />,
+    title: "Главная",
+    id: "1",
+  },
+  {
+    path: "/history",
+    icon: <TimeIcon />,
+    title: "История",
+    id: "2",
+  },
+];
 
 const HeaderComponent = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [selectedTab, setSelectedTab] = useState("/main");
+  useEffect(() => {
+    setSelectedTab(location.pathname);
+  }, [location]);
+
+  const handleOnTabClick = (tab: string) => {
+    return () => {
+      navigate(tab);
+    };
+  };
   return (
     <>
       <header className="flex flex-row w-full pb-10  select-none text-xl justify-between">
         <nav className="flex flex-row gap-10 text-xl items-center">
-          <div className="cursor-pointer font-bold">
-            <IconWrapper>
-              Главная <HomeIcon />
-            </IconWrapper>
-          </div>
-          <div className="cursor-pointer font-bold">
-            <IconWrapper>
-              История <TimeIcon />
-            </IconWrapper>
-          </div>
+          {tabs.map((tab) => {
+            const isTabSelected = selectedTab === tab.path;
+
+            return (
+              <div
+                className={`cursor-pointer font-bold ${
+                  isTabSelected ? "" : "text-gray-400"
+                }`}
+                key={tab.id}
+                onClick={handleOnTabClick(tab.path)}
+              >
+                <IconWrapper>
+                  {tab.icon} {tab.title}
+                </IconWrapper>
+              </div>
+            );
+          })}
         </nav>
-        <div className="flex gap-20 justify-start">
-          <button className="border-[3px] rounded-full py-4 px-12 font-bold">
+        <div className="flex gap-10 justify-start">
+          <button className="border-[3px] rounded-full py-2 px-8 font-bold text-[18px]">
             Войти
           </button>
-          <button className="rounded-full py-4 px-12 font-bold bg-gradient-to-r from-[#8176AF] to-[#C0B7E8] text-black">
+          <button className="rounded-full py-2 px-8 font-bold bg-gradient-to-r from-[#8176AF] to-[#C0B7E8] text-black text-[18px]">
             Регистрация
           </button>
         </div>
@@ -30,4 +66,5 @@ const HeaderComponent = () => {
     </>
   );
 };
+
 export { HeaderComponent };

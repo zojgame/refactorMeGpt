@@ -25,12 +25,12 @@ function TerminalComponent({ editable = false }: TerminalComponentProps) {
       onClick={() => textareaRef.current?.focus()}
       className="relative flex bg-[#282a36] w-fit flex-col rounded h-[400px]"
     >
-      <div className="flex justify-between px-3 py-1  border-b h-[35px]">
+      <div className="flex justify-between px-4 py-1  border-b h-[35px]">
         <div className="flex">Terminal</div>
         <div className="flex">JavaScript</div>
       </div>
       <textarea
-        className="absolute inset-0 resize-none bg-transparent p-[43px] pl-[42px] font-mono text-transparent caret-white outline-none w-[900px] h-[600px]"
+        className="absolute inset-0 resize-none bg-transparent p-[43px] pl-[48px] font-mono text-transparent caret-white outline-none w-[900px] h-[600px]"
         ref={textareaRef}
         value={code}
         onChange={(e) => setCode(e.target.value)}

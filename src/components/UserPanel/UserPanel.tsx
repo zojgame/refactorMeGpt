@@ -64,10 +64,10 @@ const UserPanelComponent = () => {
         options={typeModify}
       />
       <Select
+        maxTagCount="responsive"
         mode="multiple"
         style={{
-          width: 500,
-          height: 120,
+          width: 550,
           verticalAlign: "start",
         }}
         placeholder="Введите дополнительные параметры рефакторинга"

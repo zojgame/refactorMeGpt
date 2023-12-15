@@ -2,7 +2,8 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.tsx";
 import "./index.css";
-import { HeaderComponent } from "@/components";
+import { HeaderComponent, LoginModalComponent } from "@/components";
+import { RegistrationModalComponent } from "./components/RegistrationModal/RegistrationModal.tsx";
 
 const router = createBrowserRouter([
   {
@@ -11,7 +12,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: "history",
-        element: <div>History</div>,
+        element: (
+          <div className="flex gap-5">
+            <LoginModalComponent />
+            <RegistrationModalComponent />
+          </div>
+        ),
       },
       {
         path: "main",

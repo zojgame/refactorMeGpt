@@ -1,4 +1,3 @@
-// import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import "./App.css";
 import { TerminalComponent, UserPanelComponent } from "@/components";
 
