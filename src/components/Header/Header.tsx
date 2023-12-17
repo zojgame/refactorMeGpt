@@ -1,7 +1,10 @@
 import { Outlet } from "react-router-dom";
-import { HomeIcon, TimeIcon, IconWrapper } from "@/icons";
-import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import useStore from "@/store/store";
+import { HomeIcon, TimeIcon, IconWrapper } from "@/icons";
+import { LoginModalComponent, RegistrationModalComponent } from "..";
+import "../../App.css";
 
 const tabs = [
   {
@@ -19,6 +22,7 @@ const tabs = [
 ];
 
 const HeaderComponent = () => {
+  const { modal, setModal } = useStore();
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedTab, setSelectedTab] = useState("/main");
@@ -31,9 +35,18 @@ const HeaderComponent = () => {
       navigate(tab);
     };
   };
+  function handleOnLoginClick(): void {
+    setModal(<LoginModalComponent />);
+  }
+
+  function handleOnRegisterClick(): void {
+    setModal(<RegistrationModalComponent />);
+  }
+
   return (
     <>
-      <header className="flex flex-row w-full pb-10  select-none text-xl justify-between">
+      {modal}
+      <header className="flex flex-row w-full select-none text-xl justify-between px-16 py-10">
         <nav className="flex flex-row gap-10 text-xl items-center">
           {tabs.map((tab) => {
             const isTabSelected = selectedTab === tab.path;
@@ -54,10 +67,16 @@ const HeaderComponent = () => {
           })}
         </nav>
         <div className="flex gap-10 justify-start">
-          <button className="border-[3px] rounded-full py-2 px-8 font-bold text-[18px]">
+          <button
+            className="border-[3px] rounded-full py-2 px-8 font-bold text-[18px]"
+            onClick={handleOnLoginClick}
+          >
             Войти
           </button>
-          <button className="rounded-full py-2 px-8 font-bold bg-gradient-to-r from-[#8176AF] to-[#C0B7E8] text-black text-[18px]">
+          <button
+            className="rounded-full py-2 px-8 font-bold bg-gradient-to-r from-[#8176AF] to-[#C0B7E8] text-black text-[18px]"
+            onClick={handleOnRegisterClick}
+          >
             Регистрация
           </button>
         </div>

@@ -1,6 +1,11 @@
 import { useRef, useState } from "react";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { useCopyToClipboard } from "usehooks-ts";
+import Editor from "@monaco-editor/react";
+import { Theme } from "@monaco-editor/react/dist";
+import { IconWrapper, CopyIcon } from "@/icons";
+import { programmingLanguages, languages, themes } from "@/mock/data";
+import useStore from "@/store/store";
+import { SelectorComponent } from "..";
 
 interface TerminalComponentProps {
   editable?: boolean;
@@ -8,7 +13,18 @@ interface TerminalComponentProps {
 
 function TerminalComponent({ editable = false }: TerminalComponentProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const {
+    selectedLang,
+    selectedProgramLang,
+    selectedTheme,
+    setProgramLang,
+    setLang,
+    setTheme,
+  } = useStore();
+  const [, copy] = useCopyToClipboard();
   const [code, setCode] = useState(`
+  // Вставьте сюда ваш код
+
     const fib = (n) => {
         if (n <= 1) {
         return n;
@@ -17,57 +33,106 @@ function TerminalComponent({ editable = false }: TerminalComponentProps) {
     };
    `);
 
+  function handleOnCopyClick(): void {
+    copy(code);
+  }
+
+  function handleOnProgramLangChange(language: string): void {
+    const programLang = programmingLanguages.find(
+      (lang) => lang.label === language
+    );
+    if (programLang) {
+      setProgramLang(programLang);
+    }
+  }
+
+  function handleOnLangChange(currentLanguage: string): void {
+    const language = languages.find((lang) => lang.label === currentLanguage);
+    if (language) {
+      setLang(language);
+    }
+  }
+
+  function handleOnCodeChange(value: string | undefined): void {
+    if (value) {
+      setCode(value);
+    }
+  }
+
+  const handleOnThemeChange = (theme: string) => {
+    if (theme) {
+      setTheme(theme as Theme);
+    }
+  };
+
   return editable ? (
     <div
-      role="button"
       tabIndex={0}
       onKeyDown={() => textareaRef.current?.focus()}
       onClick={() => textareaRef.current?.focus()}
-      className="relative flex bg-[#282a36] w-fit flex-col rounded h-[400px]"
+      className="relative flex bg-black flex-col h-full w-full rounded-ss-lg rounded-se-lg border"
     >
-      <div className="flex justify-between px-4 py-1  border-b h-[35px]">
+      <div className="flex justify-between px-4 py-1 h-[35px] border-b">
         <div className="flex">Terminal</div>
-        <div className="flex">JavaScript</div>
+        <div className="flex gap-3">
+          <div className="cursor-pointer" onClick={handleOnCopyClick}>
+            <IconWrapper>
+              <CopyIcon />
+            </IconWrapper>
+          </div>
+          <SelectorComponent
+            value={selectedTheme}
+            options={themes}
+            handleOnSelect={handleOnThemeChange}
+          />
+          <SelectorComponent
+            value={selectedProgramLang.label}
+            options={programmingLanguages}
+            className="w-[120px]"
+            handleOnSelect={handleOnProgramLangChange}
+          />
+          <SelectorComponent
+            value={selectedLang.label}
+            className="w-[40px]"
+            options={languages}
+            handleOnSelect={handleOnLangChange}
+          />
+        </div>
       </div>
-      <textarea
-        className="absolute inset-0 resize-none bg-transparent p-[43px] pl-[48px] font-mono text-transparent caret-white outline-none w-[900px] h-[600px]"
-        ref={textareaRef}
-        value={code}
-        onChange={(e) => setCode(e.target.value)}
+      <Editor
+        onChange={handleOnCodeChange}
+        language={selectedProgramLang.label}
+        className="bg-[#282a36]"
+        theme={selectedTheme}
+        defaultValue={code}
       />
-      <SyntaxHighlighter
-        showLineNumbers
-        wrapLongLines
-        language="javascript"
-        style={atomOneDark}
-        customStyle={{
-          flex: "1",
-          background: "transparent",
-        }}
-        className="w-[900px] p-0 m-0"
-      >
-        {code}
-      </SyntaxHighlighter>
     </div>
   ) : (
-    <div className="relative flex bg-[#282a36] w-fit flex-col">
-      <div className="flex justify-between px-3 py-1 rounded rounded-es-none rounded-ee-none  border-b h-[35px]">
+    <div
+      tabIndex={0}
+      onKeyDown={() => textareaRef.current?.focus()}
+      onClick={() => textareaRef.current?.focus()}
+      className="relative flex bg-black flex-col h-full w-[100%] rounded-ss-lg rounded-se-lg border"
+    >
+      <div className="flex justify-between px-4 py-1 h-[35px] border-b">
         <div className="flex">Terminal</div>
-        <div className="flex">JavaScript</div>
+
+        <div className="flex gap-4">
+          <div className="cursor-pointer" onClick={handleOnCopyClick}>
+            <IconWrapper>
+              <CopyIcon />
+            </IconWrapper>
+          </div>
+          <div>{selectedProgramLang.label}</div>
+        </div>
       </div>
-      <SyntaxHighlighter
-        showLineNumbers
-        wrapLongLines
-        language="javascript"
-        style={atomOneDark}
-        customStyle={{
-          flex: "1",
-          background: "transparent",
-        }}
-        className="w-[800px] h-[600px] p-0 m-0"
-      >
-        {code}
-      </SyntaxHighlighter>
+      <Editor
+        width={"100%"}
+        language={selectedProgramLang.label}
+        className="bg-[#282a36]"
+        theme={selectedTheme}
+        defaultValue={code}
+      />
     </div>
   );
 }

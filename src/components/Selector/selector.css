@@ -1,0 +1,43 @@
+.dropdown {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  user-select: none;
+}
+.dropdown,
+.dropdown * {
+  z-index: 10;
+}
+.dropdown .dropdown-btn {
+  cursor: pointer;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #ffffffde;
+  font-weight: 500;
+}
+.dropdown-content {
+  position: absolute;
+  top: 115%;
+  left: 0;
+  width: 100%;
+}
+.dropdown-content .item {
+  padding: 0 10px;
+  background: #000;
+  cursor: pointer;
+}
+.dropdown-content .item:hover {
+  background: #fcfcfc;
+  color: black;
+}
+
+button {
+  z-index: -1;
+  display: block;
+  margin: 0 auto;
+}
