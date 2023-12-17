@@ -46,7 +46,7 @@ const HeaderComponent = () => {
   return (
     <>
       {modal}
-      <header className="flex flex-row w-full select-none text-xl justify-between px-16 py-10">
+      <header className="flex flex-row w-full select-none text-xl justify-between px-16 py-10 ">
         <nav className="flex flex-row gap-10 text-xl items-center">
           {tabs.map((tab) => {
             const isTabSelected = selectedTab === tab.path;
@@ -66,7 +66,7 @@ const HeaderComponent = () => {
             );
           })}
         </nav>
-        <div className="flex gap-10 justify-start">
+        <div className="flex gap-10 justify-start z-10">
           <button
             className="border-[3px] rounded-full py-2 px-8 font-bold text-[18px]"
             onClick={handleOnLoginClick}
