@@ -22,16 +22,23 @@ function TerminalComponent({ editable = false }: TerminalComponentProps) {
     setTheme,
   } = useStore();
   const [, copy] = useCopyToClipboard();
-  const [code, setCode] = useState(`
-  // Вставьте сюда ваш код
+  const [code, setCode] = useState(`// Вставьте ваш код
 
-    const fib = (n) => {
-        if (n <= 1) {
-        return n;
-        }
-        return fib(n - 1) + fib(n - 2);
-    };
-   `);
+const fib = (n) => {
+  if (n <= 1) {
+    return n;
+  }
+
+  return fib(n - 1) + fib(n - 2);
+};`);
+
+  const notEditableCode = `const fib = (n) => {
+  if (n <= 1) {
+    return n;
+  }
+
+  return fib(n - 1) + fib(n - 2);
+};`;
 
   function handleOnCopyClick(): void {
     copy(code);
@@ -130,10 +137,12 @@ function TerminalComponent({ editable = false }: TerminalComponentProps) {
         </div>
       </div>
       <Editor
+        options={{ readOnly: true }}
         width={"100%"}
+        height={"100%"}
         language={selectedProgramLang.label}
         theme={selectedTheme}
-        defaultValue={code}
+        defaultValue={notEditableCode}
       />
     </div>
   );
