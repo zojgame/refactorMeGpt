@@ -70,9 +70,11 @@ function TerminalComponent({ editable = false }: TerminalComponentProps) {
       tabIndex={0}
       onKeyDown={() => textareaRef.current?.focus()}
       onClick={() => textareaRef.current?.focus()}
-      className="relative flex bg-black flex-col h-full w-full rounded-ss-lg rounded-se-lg border"
+      className={`relative flex bg-black flex-col h-full w-full rounded-ss-lg rounded-se-lg ${
+        selectedTheme === "light" ? "bg-gray-200 text-black" : ""
+      }`}
     >
-      <div className="flex justify-between px-4 py-1 h-[35px] border-b">
+      <div className="flex justify-between px-4 py-1 h-[35px]">
         <div className="flex">Terminal</div>
         <div className="flex gap-3">
           <div className="cursor-pointer" onClick={handleOnCopyClick}>
@@ -93,7 +95,7 @@ function TerminalComponent({ editable = false }: TerminalComponentProps) {
           />
           <SelectorComponent
             value={selectedLang.label}
-            className="w-[40px]"
+            className="w-[50px]"
             options={languages}
             handleOnSelect={handleOnLangChange}
           />
@@ -102,7 +104,6 @@ function TerminalComponent({ editable = false }: TerminalComponentProps) {
       <Editor
         onChange={handleOnCodeChange}
         language={selectedProgramLang.label}
-        className="bg-[#282a36]"
         theme={selectedTheme}
         defaultValue={code}
       />
@@ -112,9 +113,11 @@ function TerminalComponent({ editable = false }: TerminalComponentProps) {
       tabIndex={0}
       onKeyDown={() => textareaRef.current?.focus()}
       onClick={() => textareaRef.current?.focus()}
-      className="relative flex bg-black flex-col h-full w-[100%] rounded-ss-lg rounded-se-lg border"
+      className={`relative flex bg-black flex-col h-full w-full rounded-ss-lg rounded-se-lg  ${
+        selectedTheme === "light" ? "bg-gray-200 text-black" : ""
+      }`}
     >
-      <div className="flex justify-between px-4 py-1 h-[35px] border-b">
+      <div className="flex justify-between px-4 py-1 h-[35px]">
         <div className="flex">Terminal</div>
 
         <div className="flex gap-4">
@@ -129,7 +132,6 @@ function TerminalComponent({ editable = false }: TerminalComponentProps) {
       <Editor
         width={"100%"}
         language={selectedProgramLang.label}
-        className="bg-[#282a36]"
         theme={selectedTheme}
         defaultValue={code}
       />

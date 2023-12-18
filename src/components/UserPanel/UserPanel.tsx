@@ -1,5 +1,5 @@
-import { typeModify, additionalPrompts } from "@/mock/data";
 import Select from "antd/es/select";
+import { typeModify, additionalPrompts } from "@/mock/data";
 
 const UserPanelComponent = () => {
   return (
@@ -14,7 +14,7 @@ const UserPanelComponent = () => {
         maxTagCount="responsive"
         mode="multiple"
         style={{
-          width: 550,
+          width: 650,
           verticalAlign: "start",
         }}
         placeholder="Введите дополнительные параметры рефакторинга"

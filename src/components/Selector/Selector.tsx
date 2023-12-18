@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Theme } from "@monaco-editor/react/dist";
+import useStore from "@/store/store";
 import { Selector } from "@/types";
 import "./selector.css";
 
@@ -17,6 +18,7 @@ const SelectorComponent = ({
   className = "w-[100px]",
 }: SelectorComponentProps) => {
   const [isActive, setIsActive] = useState(false);
+  const { selectedTheme } = useStore();
 
   const handleOnClick = (opt: Selector) => {
     return () => {
@@ -47,7 +49,11 @@ const SelectorComponent = ({
           <div
             key={opt.value}
             onClick={handleOnClick(opt)}
-            className="item truncate"
+            className={`item truncate bg-inherit ${
+              selectedTheme === "light"
+                ? "hover:bg-[#282a36] text-black hover:text-white"
+                : "hover:bg-white text-white hover:text-black"
+            }`}
           >
             {opt.label}
           </div>

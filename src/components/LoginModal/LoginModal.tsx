@@ -1,11 +1,13 @@
 import { useRef } from "react";
 import { useOnClickOutside } from "usehooks-ts";
 import useStore from "@/store/store";
+import { IconWrapper, CrossIcon } from "@/icons";
 
 const LoginModalComponent = () => {
   const formRef = useRef(null);
   const { setModal } = useStore();
-  const handleClickOutside = () => {
+
+  const handleCloseModal = () => {
     setModal(null);
   };
 
@@ -14,7 +16,7 @@ const LoginModalComponent = () => {
     console.log("formRef", formRef.current);
   }
 
-  useOnClickOutside(formRef, handleClickOutside);
+  useOnClickOutside(formRef, handleCloseModal);
 
   return (
     <div className="block absolute h-[100vh] w-[100vw]  z-[50] backdrop-blur-sm">
@@ -23,7 +25,15 @@ const LoginModalComponent = () => {
         onSubmit={handleOnSubmit}
         ref={formRef}
       >
-        <h2 className="font-bold text-[36px] mb-5 mr-auto">Вход</h2>
+        <div className="flex">
+          <h2 className="font-bold text-[36px] mb-5 mr-auto">Вход</h2>
+          <div onClick={handleCloseModal}>
+            <IconWrapper>
+              <CrossIcon className="cursor-pointer" />
+            </IconWrapper>
+          </div>
+        </div>
+
         <label>
           <input
             type="text"
@@ -40,7 +50,7 @@ const LoginModalComponent = () => {
         </label>
         <button
           type="submit"
-          className="bg-gradient-to-r from-[#8176AF] to-[#C0B7E8] p-2 rounded-full text-black font-semibold"
+          className="bg-gradient-to-r from-[#8176AF] to-[#C0B7E8] p-2 rounded-full text-black font-semibold px-8"
         >
           Войти
         </button>

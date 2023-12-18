@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useOnClickOutside } from "usehooks-ts";
 import useStore from "@/store/store";
+import { IconWrapper, CrossIcon } from "@/icons";
 
 const RegistrationModalComponent = () => {
   const formRef = useRef(null);
@@ -10,11 +11,11 @@ const RegistrationModalComponent = () => {
     console.log("formRef", formRef.current);
   }
 
-  const handleClickOutside = () => {
+  const handleCloseModal = () => {
     setModal(null);
   };
 
-  useOnClickOutside(formRef, handleClickOutside);
+  useOnClickOutside(formRef, handleCloseModal);
 
   return (
     <div className="block absolute h-[100vh] w-[100vw]  z-[50] backdrop-blur-sm">
@@ -23,7 +24,14 @@ const RegistrationModalComponent = () => {
         onSubmit={handleOnSubmit}
         ref={formRef}
       >
-        <h2 className="font-bold text-[36px] mb-5 mr-auto">Регистрация</h2>
+        <div className="flex">
+          <h2 className="font-bold text-[36px] mb-5 mr-auto">Регистрация</h2>
+          <div onClick={handleCloseModal}>
+            <IconWrapper>
+              <CrossIcon className="cursor-pointer" />
+            </IconWrapper>
+          </div>
+        </div>
         <label>
           <input
             type="text"
@@ -47,7 +55,7 @@ const RegistrationModalComponent = () => {
         </label>
         <button
           type="submit"
-          className="bg-gradient-to-r from-[#8176AF] to-[#C0B7E8] p-2 rounded-full text-black font-semibold"
+          className="bg-gradient-to-r from-[#8176AF] to-[#C0B7E8] p-2 rounded-full text-black font-semibold px-8"
         >
           Зарегистрироваться
         </button>

@@ -9,7 +9,7 @@ function MainPage() {
           <TerminalComponent editable />
         </div>
         <div className="flex flex-col w-fit px-3 h-full justify-center">
-          <button className="z-10 flex font-semibold w-28 h-28 border m-auto bg-[#282a36] justify-center items-center rounded-full cursor-pointer select-none">
+          <button className="z-10 flex font-semibold w-28 h-28 m-auto bg-[#282a36] justify-center items-center rounded-full cursor-pointer select-none">
             Выполнить
           </button>
         </div>
