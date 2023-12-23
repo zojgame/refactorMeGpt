@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useCopyToClipboard } from "usehooks-ts";
 import Editor from "@monaco-editor/react";
 import { Theme } from "@monaco-editor/react/dist";
-import { IconWrapper, CopyIcon } from "@/icons";
+import { IconWrapper, CopyIcon, SentIcon } from "@/icons";
 import { programmingLanguages, languages, themes } from "@/mock/data";
 import useStore from "@/store/store";
 import { SelectorComponent } from "..";
@@ -77,35 +77,43 @@ const fib = (n) => {
       tabIndex={0}
       onKeyDown={() => textareaRef.current?.focus()}
       onClick={() => textareaRef.current?.focus()}
-      className={`relative flex bg-black flex-col h-full w-full rounded-ss-lg rounded-se-lg ${
+      className={`relative flex bg-black flex-col h-[calc(100vh-160px)] w-full ${
         selectedTheme === "light" ? "bg-gray-200 text-black" : ""
       }`}
     >
-      <div className="flex justify-between px-4 py-1 h-[35px]">
-        <div className="flex">Terminal</div>
+      <div className="flex justify-between px-4 py-1 h-[55px] items-center border-r ">
+        <div className="flex gap-3">
+          <div>Terminal</div>
+          <button className="z-10 flex font-semibold  m-auto  justify-center items-center  cursor-pointer select-none">
+            <IconWrapper>
+              <SentIcon />
+            </IconWrapper>
+          </button>
+        </div>
+
         <div className="flex gap-3">
           <div className="cursor-pointer" onClick={handleOnCopyClick}>
             <IconWrapper>
               <CopyIcon />
             </IconWrapper>
           </div>
-          <SelectorComponent
+          {/* <SelectorComponent
             value={selectedTheme}
             options={themes}
             handleOnSelect={handleOnThemeChange}
-          />
+          /> */}
           <SelectorComponent
             value={selectedProgramLang.label}
             options={programmingLanguages}
             className="w-[120px]"
             handleOnSelect={handleOnProgramLangChange}
           />
-          <SelectorComponent
+          {/* <SelectorComponent
             value={selectedLang.label}
             className="w-[50px]"
             options={languages}
             handleOnSelect={handleOnLangChange}
-          />
+          /> */}
         </div>
       </div>
       <Editor
@@ -120,26 +128,21 @@ const fib = (n) => {
       tabIndex={0}
       onKeyDown={() => textareaRef.current?.focus()}
       onClick={() => textareaRef.current?.focus()}
-      className={`relative flex bg-black flex-col h-full w-full rounded-ss-lg rounded-se-lg  ${
+      className={`relative flex bg-black flex-col h-[calc(100vh-160px)] w-full  ${
         selectedTheme === "light" ? "bg-gray-200 text-black" : ""
       }`}
     >
-      <div className="flex justify-between px-4 py-1 h-[35px]">
-        <div className="flex">Terminal</div>
-
+      <div className="flex justify-end px-4 py-1 h-[55px] items-center">
         <div className="flex gap-4">
           <div className="cursor-pointer" onClick={handleOnCopyClick}>
             <IconWrapper>
               <CopyIcon />
             </IconWrapper>
           </div>
-          <div>{selectedProgramLang.label}</div>
         </div>
       </div>
       <Editor
         options={{ readOnly: true }}
-        width={"100%"}
-        height={"100%"}
         language={selectedProgramLang.label}
         theme={selectedTheme}
         defaultValue={notEditableCode}

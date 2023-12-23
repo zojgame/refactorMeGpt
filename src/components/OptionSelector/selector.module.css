@@ -10,7 +10,7 @@
 .dropdown * {
   z-index: 10;
 }
-.dropdown .dropdown-btn {
+.dropdown .dropdownBtn {
   cursor: pointer;
   background: transparent;
   display: flex;
@@ -19,13 +19,13 @@
   background: transparent;
   font-weight: 500;
 }
-.dropdown-content {
+.dropdownContent {
   position: absolute;
   top: 115%;
   left: 0;
   width: 100%;
 }
-.dropdown-content .item {
+.dropdownContent .item {
   padding: 0 10px;
   cursor: pointer;
 }

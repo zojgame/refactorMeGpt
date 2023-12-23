@@ -1,6 +1,5 @@
 import Select from "antd/es/select";
 import { typeModify, additionalPrompts } from "@/mock/data";
-
 const UserPanelComponent = () => {
   return (
     <div className="flex gap-10 py-5 justify-center">
