@@ -35,10 +35,15 @@ const themes: Selector[] = [
   { value: "2", label: "light" },
 ];
 
+const processingToneType: Selector[] = [
+  { value: "1", label: "Профессиональный" },
+  { value: "2", label: "Понятный" },
+];
 export {
   programmingLanguages,
   languages,
   typeModify,
   additionalPrompts,
   themes,
+  processingToneType,
 };

@@ -14,7 +14,6 @@ interface TerminalComponentProps {
 function TerminalComponent({ editable = false }: TerminalComponentProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const {
-    selectedLang,
     selectedProgramLang,
     selectedTheme,
     setProgramLang,
@@ -53,42 +52,24 @@ const fib = (n) => {
     }
   }
 
-  function handleOnLangChange(currentLanguage: string): void {
-    const language = languages.find((lang) => lang.label === currentLanguage);
-    if (language) {
-      setLang(language);
-    }
-  }
-
   function handleOnCodeChange(value: string | undefined): void {
     if (value) {
       setCode(value);
     }
   }
 
-  const handleOnThemeChange = (theme: string) => {
-    if (theme) {
-      setTheme(theme as Theme);
-    }
-  };
-
   return editable ? (
     <div
       tabIndex={0}
       onKeyDown={() => textareaRef.current?.focus()}
       onClick={() => textareaRef.current?.focus()}
-      className={`relative flex bg-black flex-col h-[calc(100vh-160px)] w-full ${
+      className={`relative flex bg-black flex-col h-[calc(100vh-100px)] w-full ${
         selectedTheme === "light" ? "bg-gray-200 text-black" : ""
       }`}
     >
-      <div className="flex justify-between px-4 py-1 h-[55px] items-center border-r ">
+      <div className="flex justify-between px-4 py-1 h-[55px] items-center border-r border-[#393929]">
         <div className="flex gap-3">
           <div>Terminal</div>
-          <button className="z-10 flex font-semibold  m-auto  justify-center items-center  cursor-pointer select-none">
-            <IconWrapper>
-              <SentIcon />
-            </IconWrapper>
-          </button>
         </div>
 
         <div className="flex gap-3">
@@ -97,23 +78,12 @@ const fib = (n) => {
               <CopyIcon />
             </IconWrapper>
           </div>
-          {/* <SelectorComponent
-            value={selectedTheme}
-            options={themes}
-            handleOnSelect={handleOnThemeChange}
-          /> */}
           <SelectorComponent
             value={selectedProgramLang.label}
             options={programmingLanguages}
             className="w-[120px]"
             handleOnSelect={handleOnProgramLangChange}
           />
-          {/* <SelectorComponent
-            value={selectedLang.label}
-            className="w-[50px]"
-            options={languages}
-            handleOnSelect={handleOnLangChange}
-          /> */}
         </div>
       </div>
       <Editor
@@ -128,7 +98,7 @@ const fib = (n) => {
       tabIndex={0}
       onKeyDown={() => textareaRef.current?.focus()}
       onClick={() => textareaRef.current?.focus()}
-      className={`relative flex bg-black flex-col h-[calc(100vh-160px)] w-full  ${
+      className={`relative flex bg-black flex-col h-[calc(100vh-100px)] w-full  ${
         selectedTheme === "light" ? "bg-gray-200 text-black" : ""
       }`}
     >

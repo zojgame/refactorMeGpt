@@ -1,0 +1,11 @@
+.header:hover {
+  text-shadow: #fffff0 1px 0 7px;
+}
+
+.headerSelected:hover {
+  text-shadow: rgb(156 163 175) 1px 0 7px;
+}
+
+.icon:hover {
+  box-shadow: #fffff0 1px 0 10px;
+}

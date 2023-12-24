@@ -12,11 +12,11 @@
 }
 .dropdown .dropdownBtn {
   cursor: pointer;
-  background: transparent;
+  background: rgb(40 42 54);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
+  border-radius: 5px;
   font-weight: 500;
 }
 .dropdownContent {

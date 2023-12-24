@@ -28,7 +28,8 @@ body {
 /* custom selector antd */
 
 .css-dev-only-do-not-override-p7e5j5.ant-select:not(.ant-select-customize-input)
-  .ant-select-selector {
+  .ant-select-selector,
+.ant-input {
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
   background-color: rgb(40 42 54);
@@ -51,7 +52,8 @@ body {
 }
 
 :where(.css-dev-only-do-not-override-p7e5j5).ant-select-dropdown
-  .ant-select-item {
+  .ant-select-item,
+.ant-input {
   color: #ffffffde;
   font-weight: 200;
 }
@@ -61,6 +63,9 @@ body {
   background-color: rgb(40 42 54);
 }
 
+.ant-input::placeholder {
+  color: grey;
+}
 :where(.css-dev-only-do-not-override-p7e5j5).ant-select-dropdown
   .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
   background-color: #ffffffde;

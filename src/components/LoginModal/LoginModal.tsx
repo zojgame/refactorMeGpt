@@ -50,7 +50,7 @@ const LoginModalComponent = () => {
         </label>
         <button
           type="submit"
-          className="bg-gradient-to-r from-[#8176AF] to-[#C0B7E8] p-2 rounded-full text-black font-semibold px-8"
+          className="bg-white p-2 rounded-full text-black font-semibold px-8"
         >
           Войти
         </button>
