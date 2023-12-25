@@ -21,7 +21,7 @@ const LoginModalComponent = () => {
   return (
     <div className="block absolute h-[100vh] w-[100vw]  z-[50] backdrop-blur-sm">
       <form
-        className="flex flex-col h-fit bg-[#211E2E] gap-8 p-10 rounded-[50px] m-auto w-[500px] absolute z-10 left-[calc(50%-250px)] top-[15%]"
+        className="flex flex-col h-fit bg-[#1f2023] gap-8 p-10 rounded-[50px] m-auto w-[500px] absolute z-10 left-[calc(50%-250px)] top-[15%]"
         onSubmit={handleOnSubmit}
         ref={formRef}
       >
@@ -38,29 +38,32 @@ const LoginModalComponent = () => {
           <input
             type="text"
             placeholder="Почта"
-            className="bg-transparent border-2 rounded-full p-2 px-5 pt-[10px] w-full"
+            className="bg-[#1f2023] border-2 rounded-full p-2 px-5 pt-[10px] w-full"
           />
         </label>
         <label className="mb-5">
           <input
             type="password"
             placeholder="Пароль"
-            className="bg-transparent border-2 rounded-full p-2 px-5 pt-[10px] w-full "
+            className="bg-[#1f2023] border-2 rounded-full p-2 px-5 pt-[10px] w-full "
           />
         </label>
         <button
           type="submit"
-          className="bg-white p-2 rounded-full text-black font-semibold px-8"
+          className="bg-secondaryColor p-2 rounded-full text-primaryColor font-semibold px-8 hover:bg-secondaryHoverColor active:bg-secondaryColor hover:text-primaryHoverColor active:text-primaryColor"
         >
           Войти
         </button>
-        <div className="flex gap-3 font-[12px] justify-center">
-          <button className=" text-gray-400 font-semibold hover:underline">
+        <div className="flex gap-3 font-[12px] justify-between">
+          <div
+            onClick={() => {}}
+            className="text-gray-400 font-semibold hover:underline cursor-pointer select-none"
+          >
             Не помню пароль
-          </button>
-          <button className="text-gray-400 font-semibold hover:underline">
+          </div>
+          <div className="text-gray-400 font-semibold hover:underline cursor-pointer select-none">
             Нет аккаунта
-          </button>
+          </div>
         </div>
       </form>
     </div>
