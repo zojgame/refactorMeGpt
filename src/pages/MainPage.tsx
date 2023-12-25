@@ -1,30 +1,30 @@
+import { Select, Input } from "antd";
 import { TerminalComponent, Sidebar } from "@/components";
 import { IconWrapper, SentIcon } from "@/icons";
 import { additionalPrompts, processingToneType } from "@/mock/data";
-import { Select, Input } from "antd";
 
 function MainPage() {
   return (
     <div className="flex flex-col h-[calc(100%-144px)]">
       <div className="flex h-full justify-between">
-        <Sidebar>
-          <h2 className="font-bold text-2xl">Параметры</h2>
+        <Sidebar className="w-[60%] px-8 py-7">
+          <h2 className="font-bold text-2xl mb-10">Параметры</h2>
           <div className="text-left">Тип обработки:</div>
           <Select
-            aria-placeholder="Что нужно сделать?"
             maxTagCount="responsive"
             mode="multiple"
             style={{
+              marginBottom: "40px",
               width: "100%",
-              verticalAlign: "start",
+              textAlign: "left",
             }}
-            placeholder=""
+            placeholder="> Что нужно сделать?"
             options={additionalPrompts}
           />
           <div className="text-left">Тон обработки:</div>
           <Select
-            style={{ width: "100%" }}
-            placeholder="Каким тоном вести диалог?"
+            style={{ width: "100%", textAlign: "left", marginBottom: "40px" }}
+            placeholder="> Каким тоном вести диалог?"
             optionFilterProp="children"
             options={processingToneType}
           />
@@ -34,8 +34,7 @@ function MainPage() {
             autoSize={{ minRows: 6, maxRows: 6 }}
             placeholder=""
           />
-
-          <button className="z-10 flex font-semibold cursor-pointer select-none border-2 p-3 rounded-full">
+          <button className="z-10 flex font-semibold cursor-pointer select-none border-2 p-3 rounded-full m-auto text-secondaryColor hover:text-secondaryHoverColor active:text-secondaryColor">
             <IconWrapper>
               <SentIcon />
             </IconWrapper>

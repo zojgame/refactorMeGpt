@@ -8,14 +8,8 @@ const programmingLanguages: Selector[] = [
   { value: "5", label: "java" },
 ];
 
-const languages: Selector[] = [
-  { value: "1", label: "ru" },
-  { value: "2", label: "en" },
-  { value: "3", label: "de" },
-];
-
 const additionalPrompts: Selector[] = [
-  { value: "1", label: "Комментирование кода" },
+  { value: "1", label: "Объяснение кода" },
   { value: "2", label: "Написать как можно короче" },
   { value: "3", label: "Удаление комментариев" },
   { value: "4", label: "Декомпозиция переменных" },
@@ -30,20 +24,13 @@ const typeModify: Selector[] = [
   { value: "3", label: "Комментирование с объяснением кода" },
 ];
 
-const themes: Selector[] = [
-  { value: "1", label: "vs-dark" },
-  { value: "2", label: "light" },
-];
-
 const processingToneType: Selector[] = [
   { value: "1", label: "Профессиональный" },
   { value: "2", label: "Понятный" },
 ];
 export {
   programmingLanguages,
-  languages,
   typeModify,
   additionalPrompts,
-  themes,
   processingToneType,
 };

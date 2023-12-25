@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { Theme } from "@monaco-editor/react/dist";
-import useStore from "@/store/store";
 import { Selector } from "@/types";
-// import "./selector.css";
 import styles from "./selector.module.css";
+import { ArrowIcon, IconWrapper } from "@/icons";
 
 interface SelectorComponentProps {
   options: Selector[];
   value: string;
   handleOnSelect: (event: string) => void;
   className?: string;
+  hoverTitle?: string;
 }
 
 const SelectorComponent = ({
@@ -17,9 +17,9 @@ const SelectorComponent = ({
   value,
   handleOnSelect,
   className = "w-[100px]",
+  hoverTitle,
 }: SelectorComponentProps) => {
   const [isActive, setIsActive] = useState(false);
-  const { selectedTheme } = useStore();
 
   const handleOnClick = (opt: Selector) => {
     return () => {
@@ -35,6 +35,7 @@ const SelectorComponent = ({
 
   return (
     <div
+      title={hoverTitle}
       className={`${styles.dropdown} flex w-[120px] ${
         className ? className : ""
       }`}
@@ -44,7 +45,14 @@ const SelectorComponent = ({
         className={`${styles.dropdownBtn} truncate w-full`}
       >
         {value}
-        <span className={isActive ? "fas fa-caret-up" : "fas fa-caret-down"} />
+        <span
+          className={`${
+            isActive ? "fas fa-caret-up" : "fas fa-caret-down"
+          } align-middle`}
+        />
+        <IconWrapper className="ml-auto">
+          <ArrowIcon />
+        </IconWrapper>
       </div>
       <div
         className={`${styles.dropdownContent}`}
@@ -54,11 +62,7 @@ const SelectorComponent = ({
           <div
             key={opt.value}
             onClick={handleOnClick(opt)}
-            className={`${styles.item} truncate bg-inherit ${
-              selectedTheme === "light"
-                ? "hover:bg-[#282a36] text-black hover:text-white"
-                : "hover:bg-white text-white hover:text-black"
-            }`}
+            className={`${styles.item} truncate bg-inherit hover:bg-secondaryColor text-secondaryColor hover:text-primaryColor`}
           >
             {opt.label}
           </div>

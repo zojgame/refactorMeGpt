@@ -54,8 +54,8 @@ const HeaderComponent = () => {
 
             return (
               <div
-                className={`cursor-pointer font-bold hover:drop-shadow-2xl ${
-                  isTabSelected ? "" : `text-gray-400 ${styles.headerSelected}`
+                className={`cursor-pointer font-bold ${
+                  isTabSelected ? "" : ` ${styles.tabSelected}`
                 }`}
                 key={tab.id}
                 onClick={handleOnTabClick(tab.path)}
@@ -69,13 +69,13 @@ const HeaderComponent = () => {
         </nav>
         <div className="flex gap-10 justify-start z-10">
           <button
-            className={`border-[3px] rounded-full py-2 px-6 font-bold text-[16px] ${styles.icon}`}
+            className={`border-[3px] rounded-full py-2 px-6 font-bold text-[16px]  ${styles.login}`}
             onClick={handleOnLoginClick}
           >
             Войти
           </button>
           <button
-            className={`rounded-full py-2 px-6 font-bold bg-white text-black text-[16px] ${styles.icon}`}
+            className={`rounded-full py-2 px-6 font-bold text-[16px] ${styles.registration}`}
             onClick={handleOnRegisterClick}
           >
             Регистрация

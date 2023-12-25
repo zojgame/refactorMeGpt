@@ -1,27 +1,45 @@
 import { useRef, useState } from "react";
 import { useCopyToClipboard } from "usehooks-ts";
 import Editor from "@monaco-editor/react";
-import { Theme } from "@monaco-editor/react/dist";
-import { IconWrapper, CopyIcon, SentIcon } from "@/icons";
-import { programmingLanguages, languages, themes } from "@/mock/data";
+import { IconWrapper, CopyIcon } from "@/icons";
+import { programmingLanguages } from "@/mock/data";
 import useStore from "@/store/store";
 import { SelectorComponent } from "..";
 
 interface TerminalComponentProps {
   editable?: boolean;
+  defaultCode?: string;
+  title?: string;
 }
 
-function TerminalComponent({ editable = false }: TerminalComponentProps) {
+interface EditableTerminalComponentProps {
+  defaultCode?: string;
+  title?: string;
+}
+
+function TerminalComponent({
+  editable = false,
+  defaultCode,
+  title,
+}: TerminalComponentProps) {
+  return editable ? (
+    <EditableTerminalComponent defaultCode={defaultCode} title={title} />
+  ) : (
+    <ReadonlyTerminalComponent defaultCode={defaultCode} title={title} />
+  );
+}
+
+function EditableTerminalComponent({
+  defaultCode,
+  title = "Терминал",
+}: EditableTerminalComponentProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const {
-    selectedProgramLang,
-    selectedTheme,
-    setProgramLang,
-    setLang,
-    setTheme,
-  } = useStore();
+  const { selectedProgramLang, setProgramLang } = useStore();
   const [, copy] = useCopyToClipboard();
-  const [code, setCode] = useState(`// Вставьте ваш код
+
+  const [code, setCode] = useState(
+    defaultCode ??
+      `// Вставьте ваш код
 
 const fib = (n) => {
   if (n <= 1) {
@@ -29,15 +47,8 @@ const fib = (n) => {
   }
 
   return fib(n - 1) + fib(n - 2);
-};`);
-
-  const notEditableCode = `const fib = (n) => {
-  if (n <= 1) {
-    return n;
-  }
-
-  return fib(n - 1) + fib(n - 2);
-};`;
+};`
+  );
 
   function handleOnCopyClick(): void {
     copy(code);
@@ -58,63 +69,93 @@ const fib = (n) => {
     }
   }
 
-  return editable ? (
+  return (
     <div
       tabIndex={0}
       onKeyDown={() => textareaRef.current?.focus()}
       onClick={() => textareaRef.current?.focus()}
-      className={`relative flex bg-black flex-col h-[calc(100vh-100px)] w-full ${
-        selectedTheme === "light" ? "bg-gray-200 text-black" : ""
-      }`}
+      className={`relative flex bg-black flex-col h-[calc(100vh-100px)] w-full`}
     >
-      <div className="flex justify-between px-4 py-1 h-[55px] items-center border-r border-[#393929]">
+      <div className="flex justify-between px-4 py-1 h-[55px] items-center border-r border-[#393929] bg-primaryColor">
+        {title ? <div className="font-semibold">{title}</div> : <></>}
         <div className="flex gap-3">
-          <div>Terminal</div>
-        </div>
-
-        <div className="flex gap-3">
-          <div className="cursor-pointer" onClick={handleOnCopyClick}>
-            <IconWrapper>
-              <CopyIcon />
-            </IconWrapper>
-          </div>
           <SelectorComponent
+            hoverTitle="Выбрать язык"
             value={selectedProgramLang.label}
             options={programmingLanguages}
             className="w-[120px]"
             handleOnSelect={handleOnProgramLangChange}
           />
-        </div>
-      </div>
-      <Editor
-        onChange={handleOnCodeChange}
-        language={selectedProgramLang.label}
-        theme={selectedTheme}
-        defaultValue={code}
-      />
-    </div>
-  ) : (
-    <div
-      tabIndex={0}
-      onKeyDown={() => textareaRef.current?.focus()}
-      onClick={() => textareaRef.current?.focus()}
-      className={`relative flex bg-black flex-col h-[calc(100vh-100px)] w-full  ${
-        selectedTheme === "light" ? "bg-gray-200 text-black" : ""
-      }`}
-    >
-      <div className="flex justify-end px-4 py-1 h-[55px] items-center">
-        <div className="flex gap-4">
           <div className="cursor-pointer" onClick={handleOnCopyClick}>
-            <IconWrapper>
+            <IconWrapper
+              hoverTitle="Копировать"
+              className="text-secondaryColor hover:text-secondaryHoverColor active:text-secondaryColor"
+            >
               <CopyIcon />
             </IconWrapper>
           </div>
         </div>
       </div>
       <Editor
+        onChange={handleOnCodeChange}
+        defaultValue={code}
+        language={selectedProgramLang.label}
+        theme="vs-dark"
+      />
+    </div>
+  );
+}
+
+function ReadonlyTerminalComponent({
+  defaultCode,
+  title,
+}: EditableTerminalComponentProps) {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const { selectedProgramLang } = useStore();
+  const [, copy] = useCopyToClipboard();
+
+  const notEditableCode =
+    defaultCode ??
+    `const fib = (n) => {
+  if (n <= 1) {
+    return n;
+  }
+
+  return fib(n - 1) + fib(n - 2);
+};`;
+
+  function handleOnCopyClick(): void {
+    copy(notEditableCode);
+  }
+
+  return (
+    <div
+      tabIndex={0}
+      onKeyDown={() => textareaRef.current?.focus()}
+      onClick={() => textareaRef.current?.focus()}
+      className={`relative flex bg-black flex-col h-[calc(100vh-100px)] w-full `}
+    >
+      <div
+        className={`flex px-4 py-1 h-[55px] items-center bg-primaryColor ${
+          title ? "justify-between" : "justify-end"
+        }`}
+      >
+        {title ? <div className="font-semibold">{title}</div> : <></>}
+        <div className="flex gap-4">
+          <div className="cursor-pointer" onClick={handleOnCopyClick}>
+            <IconWrapper
+              hoverTitle="Копировать"
+              className="text-secondaryColor hover:text-secondaryHoverColor active:text-secondaryColor"
+            >
+              <CopyIcon />
+            </IconWrapper>
+          </div>
+        </div>
+      </div>
+      <Editor
+        theme="vs-dark"
         options={{ readOnly: true }}
         language={selectedProgramLang.label}
-        theme={selectedTheme}
         defaultValue={notEditableCode}
       />
     </div>

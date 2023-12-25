@@ -32,7 +32,7 @@ body {
 .ant-input {
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
-  background-color: rgb(40 42 54);
+  background-color: #40414f;
   border: none;
 }
 
@@ -60,7 +60,7 @@ body {
 
 :where(.css-dev-only-do-not-override-p7e5j5).ant-select-dropdown {
   font-family: "Montserrat", sans-serif;
-  background-color: rgb(40 42 54);
+  background-color: #40414f;
 }
 
 .ant-input::placeholder {
@@ -110,4 +110,24 @@ body {
   .ant-select-selector {
   align-items: start;
   color: #ffffffde;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
