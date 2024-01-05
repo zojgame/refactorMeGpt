@@ -9,28 +9,42 @@ const programmingLanguages: Selector[] = [
 ];
 
 const additionalPrompts: Selector[] = [
-  { value: "1", label: "Объяснение кода" },
-  { value: "2", label: "Написать как можно короче" },
-  { value: "3", label: "Удаление комментариев" },
-  { value: "4", label: "Декомпозиция переменных" },
-  { value: "5", label: "Переименование переменных" },
-  { value: "6", label: "Разбиение на компоненты" },
-  { value: "7", label: "Прописать типы" },
-];
-
-const typeModify: Selector[] = [
-  { value: "1", label: "Рефакторинг кода" },
-  { value: "2", label: "Рефакторинг переменных" },
-  { value: "3", label: "Комментирование с объяснением кода" },
+  {
+    value: "1",
+    label: "Пояснить код комментариями",
+    gptTitle: "Написать комментарии поясняющие код",
+  },
+  {
+    value: "2",
+    label: "Написать код как можно короче",
+    gptTitle: "Сделать рефакторинг, сделав код более коротким",
+  },
+  {
+    value: "3",
+    label: "Удалить комментарии",
+    gptTitle: "Удалить все комментарии",
+  },
+  {
+    value: "5",
+    label: "Переименовать переменные",
+    gptTitle: "Переименовать переменные и функции, сделав код понятнее",
+  },
+  {
+    value: "9",
+    label: "Рефакторинг методом camelCase",
+    gptTitle:
+      "сделать рефакторин, переименовав все переменные и функции методом camelcase",
+  },
+  {
+    value: "10",
+    label: "Рефакторинг методом snakeCase",
+    gptTitle:
+      "сделать рефакторин, переименовав все переменные и функции методом snakecase",
+  },
 ];
 
 const processingToneType: Selector[] = [
-  { value: "1", label: "Профессиональный" },
-  { value: "2", label: "Понятный" },
+  { value: "1", label: "Профессиональный", gptTitle: "Профессиональнее" },
+  { value: "2", label: "Понятный", gptTitle: "Понятнее" },
 ];
-export {
-  programmingLanguages,
-  typeModify,
-  additionalPrompts,
-  processingToneType,
-};
+export { programmingLanguages, additionalPrompts, processingToneType };

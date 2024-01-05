@@ -1,10 +1,10 @@
 import "./App.css";
-import { TerminalComponent, UserPanelComponent } from "@/components";
+import { TerminalComponent } from "@/components";
 
 function App() {
   return (
     <div className="flex flex-col h-[calc(100%-144px)]">
-      <UserPanelComponent />
+      {/* <UserPanelComponent /> */}
       <div className="flex h-full justify-between">
         <div className="w-full h-full max-w-[44vw]">
           <TerminalComponent editable />

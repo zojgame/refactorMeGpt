@@ -28,7 +28,7 @@ const HistoryPage = () => {
   const previously = history.slice(8);
   return (
     <div className="flex">
-      <Sidebar className="w-[30%] overflow-y-auto flex px-8">
+      <Sidebar className="w-[60%] overflow-y-auto flex px-8">
         <div className="text-sm text-left text-[#666] font-semibold ">
           Последние 7 дней
         </div>
