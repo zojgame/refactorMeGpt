@@ -11,4 +11,11 @@ type Selector = {
   gptTitle?: string;
 };
 
-export type { Language, ProgramLanguage, Selector };
+type AuthorizationRes = {
+  id: number;
+  username: string;
+  accessToken: string;
+  tokenType: string;
+};
+
+export type { Language, ProgramLanguage, Selector, AuthorizationRes };

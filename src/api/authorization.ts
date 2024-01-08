@@ -1,5 +1,5 @@
 import ky from "ky";
-import { SINGUP_API } from "./urls";
+import { SINGUP_API, SINGIN_API } from "./urls";
 
 const singUp = async (username: string, email: string, password: string) => {
   const res = await ky
@@ -11,7 +11,7 @@ const singUp = async (username: string, email: string, password: string) => {
 
 const singIn = async (username: string, password: string) => {
   const res = await ky
-    .post(SINGUP_API, { json: { username, password } })
+    .post(SINGIN_API, { json: { username, password } })
     .json();
 
   return res;

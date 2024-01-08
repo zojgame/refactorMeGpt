@@ -121,7 +121,7 @@ const MainPageSidebar = () => {
         <div className="text-left">Дополнительные параметры:</div>
         <Input.TextArea
           autoSize={{ minRows: 6, maxRows: 6 }}
-          placeholder=""
+          placeholder="> Начинай все названия переменных и функций с буквы F"
           onChange={(e) => changeField("additional", e.target.value)}
         />
       </form>

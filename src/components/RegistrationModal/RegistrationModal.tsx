@@ -19,18 +19,22 @@ const RegistrationModalComponent = () => {
 
       if (password !== repeatPassword) {
         setErrorMessage("Пароли не совпадают");
-      } else if (!password && !repeatPassword && !username) {
+      } else if (!password || !repeatPassword || !username) {
         setErrorMessage("Заполните все обязательные поля");
       } else if (password.length < 5) {
         setErrorMessage("Пароль слишком короткий");
       } else {
         setErrorMessage("");
-        singUp(username, password, repeatPassword).then((res) =>
-          console.log("res", res)
-        );
+        singUp(username, password, repeatPassword);
       }
     }
   }
+
+  const handleOnFieldChange = () => {
+    if (errorMessage !== "") {
+      setErrorMessage("");
+    }
+  };
 
   const handleCloseModal = () => {
     setModal(null);
@@ -41,7 +45,7 @@ const RegistrationModalComponent = () => {
   return (
     <div className="block absolute h-[100vh] w-[100vw]  z-[50] backdrop-blur-sm">
       <form
-        className="flex flex-col h-fit bg-[#1f2023] gap-8 p-10 rounded-[50px] m-auto w-[500px] absolute z-10 left-[calc(50%-250px)] top-[15%]"
+        className="flex flex-col h-fit bg-[#1f2023] gap-8 p-10 rounded-[50px] m-auto w-[500px] absolute z-10 left-[calc(50%-250px)] top-[5%]"
         onSubmit={handleOnSubmit}
         ref={formRef}
       >
@@ -63,6 +67,7 @@ const RegistrationModalComponent = () => {
         </div>
         <label>
           <input
+            onChange={handleOnFieldChange}
             type="text"
             placeholder="Логин"
             className="bg-[#1f2023] border-2 rounded-full p-2 px-5 pt-[10px] w-full"
@@ -77,6 +82,7 @@ const RegistrationModalComponent = () => {
         </label>
         <label className="mb-5">
           <input
+            onChange={handleOnFieldChange}
             type="password"
             placeholder="Повторите пароль"
             className="bg-[#1f2023] border-2 rounded-full p-2 px-5 pt-[10px] w-full "

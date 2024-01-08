@@ -2,7 +2,8 @@ import { useRef, useState } from "react";
 import { useOnClickOutside } from "usehooks-ts";
 import useStore from "@/store/store";
 import { IconWrapper, CrossIcon } from "@/icons";
-import { singUp } from "@/api/authorization";
+import { singIn } from "@/api/authorization";
+import { AuthorizationRes } from "@/types";
 
 const LoginModalComponent = () => {
   const formRef = useRef(null);
@@ -20,23 +21,33 @@ const LoginModalComponent = () => {
       const username = (formRef.current[0] as HTMLInputElement).value;
       const password = (formRef.current[1] as HTMLInputElement).value;
 
-      if (!password && !username) {
+      if (!password || !username) {
         setErrorMessage("Заполните все обязательные поля");
-      } else if (password.length < 5) {
-        setErrorMessage("Пароль слишком короткий");
       } else {
         setErrorMessage("");
-        console.log("sended");
+        singIn(username, password).then((res) => {
+          const response = res as AuthorizationRes;
+          if (response) {
+            const token = `${response.tokenType} ${response.accessToken}`;
+            localStorage.setItem("token", token);
+          }
+        });
       }
     }
   }
+
+  const handleOnFieldChange = () => {
+    if (errorMessage !== "") {
+      setErrorMessage("");
+    }
+  };
 
   useOnClickOutside(formRef, handleCloseModal);
 
   return (
     <div className="block absolute h-[100vh] w-[100vw] z-[50] backdrop-blur-sm">
       <form
-        className="flex flex-col h-fit bg-[#1f2023] gap-8 p-10 rounded-[50px] m-auto w-[500px] absolute z-10 left-[calc(50%-250px)] top-[15%]"
+        className="flex flex-col h-fit bg-[#1f2023] gap-8 p-10 rounded-[50px] m-auto w-[500px] absolute z-10 left-[calc(50%-250px)] top-[5%]"
         onSubmit={handleOnSubmit}
         ref={formRef}
       >
@@ -48,9 +59,16 @@ const LoginModalComponent = () => {
             </IconWrapper>
           </div>
         </div>
-
+        <div
+          className={`h-4 ${
+            errorMessage !== "" ? "text-left text-[#ff4b4bc8]" : ""
+          }`}
+        >
+          {errorMessage}
+        </div>
         <label>
           <input
+            onChange={handleOnFieldChange}
             type="text"
             placeholder="Логин"
             className="bg-[#1f2023] border-2 rounded-full p-2 px-5 pt-[10px] w-full"
@@ -58,6 +76,7 @@ const LoginModalComponent = () => {
         </label>
         <label className="mb-5">
           <input
+            onChange={handleOnFieldChange}
             type="password"
             placeholder="Пароль"
             className="bg-[#1f2023] border-2 rounded-full p-2 px-5 pt-[10px] w-full "
@@ -69,13 +88,13 @@ const LoginModalComponent = () => {
         >
           Войти
         </button>
-        <div className="flex gap-3 font-[12px] justify-between">
-          <div
+        <div className="flex gap-3 font-[12px] justify-center">
+          {/* <div
             onClick={() => {}}
             className="text-gray-400 font-semibold hover:underline cursor-pointer select-none"
           >
             Не помню пароль
-          </div>
+          </div> */}
           <div className="text-gray-400 font-semibold hover:underline cursor-pointer select-none">
             Нет аккаунта
           </div>
