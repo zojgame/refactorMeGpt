@@ -1,14 +1,35 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useOnClickOutside } from "usehooks-ts";
 import useStore from "@/store/store";
 import { IconWrapper, CrossIcon } from "@/icons";
+import { singUp } from "@/api/authorization";
 
 const RegistrationModalComponent = () => {
+  const [errorMessage, setErrorMessage] = useState("");
   const formRef = useRef(null);
   const { setModal } = useStore();
+
   function handleOnSubmit(event: React.FormEvent<HTMLFormElement>): void {
     event.preventDefault();
-    console.log("formRef", formRef.current);
+
+    if (formRef.current) {
+      const username = (formRef.current[0] as HTMLInputElement).value;
+      const password = (formRef.current[1] as HTMLInputElement).value;
+      const repeatPassword = (formRef.current[2] as HTMLInputElement).value;
+
+      if (password !== repeatPassword) {
+        setErrorMessage("Пароли не совпадают");
+      } else if (!password && !repeatPassword && !username) {
+        setErrorMessage("Заполните все обязательные поля");
+      } else if (password.length < 5) {
+        setErrorMessage("Пароль слишком короткий");
+      } else {
+        setErrorMessage("");
+        singUp(username, password, repeatPassword).then((res) =>
+          console.log("res", res)
+        );
+      }
+    }
   }
 
   const handleCloseModal = () => {
@@ -26,16 +47,24 @@ const RegistrationModalComponent = () => {
       >
         <div className="flex">
           <h2 className="font-bold text-[36px] mb-5 mr-auto">Регистрация</h2>
+
           <div onClick={handleCloseModal}>
             <IconWrapper>
               <CrossIcon className="cursor-pointer" />
             </IconWrapper>
           </div>
         </div>
+        <div
+          className={`h-4 ${
+            errorMessage !== "" ? "text-left text-[#ff4b4bc8]" : ""
+          }`}
+        >
+          {errorMessage}
+        </div>
         <label>
           <input
             type="text"
-            placeholder="Почта"
+            placeholder="Логин"
             className="bg-[#1f2023] border-2 rounded-full p-2 px-5 pt-[10px] w-full"
           />
         </label>

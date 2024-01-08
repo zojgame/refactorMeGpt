@@ -47,4 +47,7 @@ const processingToneType: Selector[] = [
   { value: "1", label: "Профессиональный", gptTitle: "Профессиональнее" },
   { value: "2", label: "Понятный", gptTitle: "Понятнее" },
 ];
+
+//langReqId, langResId, typeId, toneId, adding?, code
+
 export { programmingLanguages, additionalPrompts, processingToneType };

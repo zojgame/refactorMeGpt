@@ -1,10 +1,12 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useOnClickOutside } from "usehooks-ts";
 import useStore from "@/store/store";
 import { IconWrapper, CrossIcon } from "@/icons";
+import { singUp } from "@/api/authorization";
 
 const LoginModalComponent = () => {
   const formRef = useRef(null);
+  const [errorMessage, setErrorMessage] = useState("");
   const { setModal } = useStore();
 
   const handleCloseModal = () => {
@@ -13,13 +15,26 @@ const LoginModalComponent = () => {
 
   function handleOnSubmit(event: React.FormEvent<HTMLFormElement>): void {
     event.preventDefault();
-    console.log("formRef", formRef.current);
+
+    if (formRef.current) {
+      const username = (formRef.current[0] as HTMLInputElement).value;
+      const password = (formRef.current[1] as HTMLInputElement).value;
+
+      if (!password && !username) {
+        setErrorMessage("Заполните все обязательные поля");
+      } else if (password.length < 5) {
+        setErrorMessage("Пароль слишком короткий");
+      } else {
+        setErrorMessage("");
+        console.log("sended");
+      }
+    }
   }
 
   useOnClickOutside(formRef, handleCloseModal);
 
   return (
-    <div className="block absolute h-[100vh] w-[100vw]  z-[50] backdrop-blur-sm">
+    <div className="block absolute h-[100vh] w-[100vw] z-[50] backdrop-blur-sm">
       <form
         className="flex flex-col h-fit bg-[#1f2023] gap-8 p-10 rounded-[50px] m-auto w-[500px] absolute z-10 left-[calc(50%-250px)] top-[15%]"
         onSubmit={handleOnSubmit}
@@ -37,7 +52,7 @@ const LoginModalComponent = () => {
         <label>
           <input
             type="text"
-            placeholder="Почта"
+            placeholder="Логин"
             className="bg-[#1f2023] border-2 rounded-full p-2 px-5 pt-[10px] w-full"
           />
         </label>
