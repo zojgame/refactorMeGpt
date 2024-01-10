@@ -4,10 +4,13 @@ import useStore from "@/store/store";
 import { IconWrapper, CrossIcon } from "@/icons";
 import { singUp } from "@/api/authorization";
 
+import { LoginModalComponent } from "..";
+
 const RegistrationModalComponent = () => {
   const [errorMessage, setErrorMessage] = useState("");
+
   const formRef = useRef(null);
-  const { setModal } = useStore();
+  const { setModal, notificationMessage } = useStore();
 
   function handleOnSubmit(event: React.FormEvent<HTMLFormElement>): void {
     event.preventDefault();
@@ -26,6 +29,13 @@ const RegistrationModalComponent = () => {
       } else {
         setErrorMessage("");
         singUp(username, password, repeatPassword);
+        if (notificationMessage) {
+          notificationMessage.success(
+            "Вы успешно зарегистрировались! Пожалуйста, войдите!"
+          );
+        }
+
+        setModal(<LoginModalComponent />);
       }
     }
   }
@@ -38,6 +48,10 @@ const RegistrationModalComponent = () => {
 
   const handleCloseModal = () => {
     setModal(null);
+  };
+
+  const onHaveAnAccountClick = () => {
+    setModal(<LoginModalComponent />);
   };
 
   useOnClickOutside(formRef, handleCloseModal);
@@ -95,7 +109,10 @@ const RegistrationModalComponent = () => {
           Зарегистрироваться
         </button>
         <div className="flex gap-3 font-[12px] justify-center">
-          <div className=" text-gray-400 font-semibold  hover:underline cursor-pointer select-none">
+          <div
+            className=" text-gray-400 font-semibold  hover:underline cursor-pointer select-none"
+            onClick={onHaveAnAccountClick}
+          >
             Уже есть аккаунт
           </div>
         </div>

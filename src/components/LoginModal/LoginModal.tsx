@@ -4,11 +4,12 @@ import useStore from "@/store/store";
 import { IconWrapper, CrossIcon } from "@/icons";
 import { singIn } from "@/api/authorization";
 import { AuthorizationRes } from "@/types";
+import { RegistrationModalComponent } from "..";
 
 const LoginModalComponent = () => {
   const formRef = useRef(null);
   const [errorMessage, setErrorMessage] = useState("");
-  const { setModal } = useStore();
+  const { setModal, notificationMessage } = useStore();
 
   const handleCloseModal = () => {
     setModal(null);
@@ -25,6 +26,8 @@ const LoginModalComponent = () => {
         setErrorMessage("Заполните все обязательные поля");
       } else {
         setErrorMessage("");
+        notificationMessage?.success("Вы успешно вошли!");
+        setModal(null);
         singIn(username, password).then((res) => {
           const response = res as AuthorizationRes;
           if (response) {
@@ -43,6 +46,10 @@ const LoginModalComponent = () => {
   };
 
   useOnClickOutside(formRef, handleCloseModal);
+
+  function onHaventAccountClick(): void {
+    setModal(<RegistrationModalComponent />);
+  }
 
   return (
     <div className="block absolute h-[100vh] w-[100vw] z-[50] backdrop-blur-sm">
@@ -95,7 +102,10 @@ const LoginModalComponent = () => {
           >
             Не помню пароль
           </div> */}
-          <div className="text-gray-400 font-semibold hover:underline cursor-pointer select-none">
+          <div
+            className="text-gray-400 font-semibold hover:underline cursor-pointer select-none"
+            onClick={onHaventAccountClick}
+          >
             Нет аккаунта
           </div>
         </div>

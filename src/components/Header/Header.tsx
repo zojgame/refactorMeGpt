@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { message } from "antd";
 import useStore from "@/store/store";
 import { HomeIcon, TimeIcon, IconWrapper } from "@/icons";
 import { LoginModalComponent, RegistrationModalComponent } from "..";
@@ -23,13 +24,16 @@ const tabs = [
 ];
 
 const HeaderComponent = () => {
-  const { modal, setModal } = useStore();
+  const { modal, setModal, setNotificationMessage } = useStore();
+  const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedTab, setSelectedTab] = useState("/main");
+
   useEffect(() => {
     setSelectedTab(location.pathname);
-  }, [location]);
+    setNotificationMessage(messageApi);
+  }, [location, messageApi, setNotificationMessage]);
 
   const handleOnTabClick = (tab: string) => {
     return () => {
@@ -46,6 +50,7 @@ const HeaderComponent = () => {
 
   return (
     <>
+      {contextHolder}
       {modal}
       <header className="flex flex-row w-full select-none text-xl justify-between px-16 py-5">
         <nav className="flex flex-row gap-10 text-[18px] items-center ">

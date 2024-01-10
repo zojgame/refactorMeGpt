@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useCopyToClipboard } from "usehooks-ts";
 import Editor from "@monaco-editor/react";
 import { IconWrapper, CopyIcon } from "@/icons";
-import { programmingLanguages } from "@/mock/data";
+import { programmingLanguages } from "@/consts/data";
 import useStore from "@/store/store";
 import { SelectorComponent } from "..";
 

@@ -3,7 +3,7 @@ import {
   additionalPrompts,
   processingToneType,
   programmingLanguages,
-} from "@/mock/data";
+} from "@/consts/data";
 import { Select, Input } from "antd";
 import { Sidebar } from "..";
 import { useState } from "react";
@@ -54,11 +54,11 @@ const MainPageSidebar = () => {
         onSubmit={handleOnSubmit}
         className="h-[calc(100vh-100px)] flex flex-col gap-3 overflow-y-scroll px-8 py-4 "
       >
-        <h2 className="font-bold text-2xl mb-5 text-left">Параметры</h2>
+        <h2 className="font-bold text-2xl text-left">Параметры</h2>
         <button
           type="submit"
           title="Начать обработку"
-          className="z-10 flex font-semibold cursor-pointer select-none border-2 p-3 rounded-full m-auto text-secondaryColor hover:text-secondaryHoverColor active:text-secondaryColor"
+          className="z-10 flex font-semibold cursor-pointer select-none border-2 p-3 rounded-full text-secondaryColor hover:text-secondaryHoverColor active:text-secondaryColor"
         >
           <IconWrapper>
             <SentIcon />
