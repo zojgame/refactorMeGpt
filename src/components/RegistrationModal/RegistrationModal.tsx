@@ -28,14 +28,17 @@ const RegistrationModalComponent = () => {
         setErrorMessage("Пароль слишком короткий");
       } else {
         setErrorMessage("");
-        singUp(username, password, repeatPassword);
-        if (notificationMessage) {
-          notificationMessage.success(
-            "Вы успешно зарегистрировались! Пожалуйста, войдите!"
-          );
-        }
-
-        setModal(<LoginModalComponent />);
+        singUp(username, password)
+          .then(() => {
+            setModal(<LoginModalComponent />);
+          })
+          .catch(() => {
+            if (notificationMessage) {
+              notificationMessage.error(
+                "Ошибка пользователь с таким логином уже существует"
+              );
+            }
+          });
       }
     }
   }

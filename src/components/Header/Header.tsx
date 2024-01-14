@@ -7,6 +7,7 @@ import { HomeIcon, TimeIcon, IconWrapper } from "@/icons";
 import { LoginModalComponent, RegistrationModalComponent } from "..";
 import "../../App.css";
 import styles from "./styles.module.css";
+import { LogoutIcon } from "@/icons/LogoutIcon";
 
 const tabs = [
   {
@@ -48,6 +49,11 @@ const HeaderComponent = () => {
     setModal(<RegistrationModalComponent />);
   }
 
+  function handleLogoutClick(): void {
+    localStorage.removeItem("token");
+    navigate("/main");
+  }
+
   return (
     <>
       {contextHolder}
@@ -72,20 +78,34 @@ const HeaderComponent = () => {
             );
           })}
         </nav>
-        <div className="flex gap-10 justify-start z-10">
-          <button
-            className={`border-[3px] rounded-full py-2 px-6 font-bold text-[16px]  ${styles.login}`}
-            onClick={handleOnLoginClick}
-          >
-            Войти
-          </button>
-          <button
-            className={`rounded-full py-2 px-6 font-bold text-[16px] ${styles.registration}`}
-            onClick={handleOnRegisterClick}
-          >
-            Регистрация
-          </button>
-        </div>
+        {!localStorage.getItem("token") ? (
+          <div className="flex gap-10 justify-start z-10">
+            <button
+              className={`border-[3px] rounded-full py-2 px-6 font-bold text-[16px]  ${styles.login}`}
+              onClick={handleOnLoginClick}
+            >
+              Войти
+            </button>
+            <button
+              className={`rounded-full py-2 px-6 font-bold text-[16px] ${styles.registration}`}
+              onClick={handleOnRegisterClick}
+            >
+              Регистрация
+            </button>
+          </div>
+        ) : (
+          <div className="flex gap-10 justify-start z-10">
+            <div
+              className={`cursor-pointer font-bold  ${styles.tabSelected} text-[18px]`}
+              onClick={handleLogoutClick}
+            >
+              <IconWrapper>
+                <LogoutIcon />
+                <>Выйти</>
+              </IconWrapper>
+            </div>
+          </div>
+        )}
       </header>
       <Outlet />
     </>

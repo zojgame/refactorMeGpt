@@ -18,4 +18,23 @@ type AuthorizationRes = {
   tokenType: string;
 };
 
-export type { Language, ProgramLanguage, Selector, AuthorizationRes };
+type HistoryRes = {
+  body: string;
+  dateTimeCreate: string;
+};
+
+// type GPTRes = {
+//   id: string,
+//   object: string,
+//   created: number,
+//   model: string,
+
+// }
+
+export type {
+  Language,
+  ProgramLanguage,
+  Selector,
+  AuthorizationRes,
+  HistoryRes,
+};

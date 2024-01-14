@@ -5,3 +5,5 @@ export { RegistrationModalComponent } from "./RegistrationModal/RegistrationModa
 export { SelectorComponent } from "./Selector/Selector";
 export { Sidebar } from "./Sidebar/Sidebar";
 export { OptionSelector } from "./OptionSelector/OptionSelector";
+export { LoadingModal } from "./LoadingModal/LoadingModal";
+export { NotAuthModal } from "./NotAuthModal/NotAuthModal";

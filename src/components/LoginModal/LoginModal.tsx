@@ -26,9 +26,9 @@ const LoginModalComponent = () => {
         setErrorMessage("Заполните все обязательные поля");
       } else {
         setErrorMessage("");
-        notificationMessage?.success("Вы успешно вошли!");
-        setModal(null);
         singIn(username, password).then((res) => {
+          notificationMessage?.success("Вы успешно вошли!");
+          setModal(null);
           const response = res as AuthorizationRes;
           if (response) {
             const token = `${response.tokenType} ${response.accessToken}`;

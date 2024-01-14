@@ -6,6 +6,6 @@ const SINGIN_API = `${AUTH_API}/signin`;
 const USER_API = `${SERVER_API}/user`;
 const USER_HISTORY_API = `${USER_API}/history`;
 
-const GPT_REQUEST_API = `${SERVER_API}/request/chatgpt-3.5`
+const GPT_REQUEST_API = `${SERVER_API}/request/chatgpt-3.5`;
 
 export { SINGIN_API, SINGUP_API, USER_HISTORY_API, GPT_REQUEST_API };

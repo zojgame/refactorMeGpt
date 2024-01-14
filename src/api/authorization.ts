@@ -1,9 +1,9 @@
 import ky from "ky";
 import { SINGUP_API, SINGIN_API } from "./urls";
 
-const singUp = async (username: string, email: string, password: string) => {
+const singUp = async (username: string, password: string) => {
   const res = await ky
-    .post(SINGUP_API, { json: { username, email, password } })
+    .post(SINGUP_API, { json: { username, password } })
     .json();
 
   return res;

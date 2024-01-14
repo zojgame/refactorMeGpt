@@ -7,6 +7,8 @@ import {
 import { Select, Input } from "antd";
 import { Sidebar } from "..";
 import { useState } from "react";
+import useStore from "@/store/store";
+import { gptReq } from "@/api/gpt";
 
 type InitialValue = {
   processingType: string[];
@@ -24,6 +26,7 @@ const formInitialValue: InitialValue = {
 
 const MainPageSidebar = () => {
   const [form, setForm] = useState<InitialValue>(formInitialValue);
+  const { codePrompt } = useStore();
   const [isError, setIsError] = useState(false);
 
   function handleOnSubmit(event: React.FormEvent<HTMLFormElement>): void {
@@ -36,8 +39,19 @@ const MainPageSidebar = () => {
       } else if (val === "" && key !== "additional") {
         setIsError(true);
       } else {
-        console.log("form send");
+        setIsError(false);
       }
+    }
+    if (!isError) {
+      gptReq(
+        form.tone,
+        form.processingType[0],
+        form.programLang,
+        codePrompt
+      ).then((res) => console.log("res", res));
+      // console.log("form", form);
+      // console.log("codePrompt", codePrompt);
+      // console.log("form send");
     }
   }
 

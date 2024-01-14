@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useCopyToClipboard } from "usehooks-ts";
 import Editor from "@monaco-editor/react";
 import { IconWrapper, CopyIcon } from "@/icons";
@@ -34,24 +34,27 @@ function EditableTerminalComponent({
   title = "Терминал",
 }: EditableTerminalComponentProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const { selectedProgramLang, setProgramLang } = useStore();
+  const { selectedProgramLang, setProgramLang, codePrompt, setCodePrompt } =
+    useStore();
   const [, copy] = useCopyToClipboard();
 
-  const [code, setCode] = useState(
-    defaultCode ??
-      `// Вставьте ваш код
-
-const fib = (n) => {
-  if (n <= 1) {
-    return n;
-  }
-
-  return fib(n - 1) + fib(n - 2);
-};`
-  );
+  useEffect(() => {
+    setCodePrompt(
+      defaultCode ??
+        `// Вставьте ваш код
+      
+      const fib = (n) => {
+        if (n <= 1) {
+          return n;
+        }
+      
+        return fib(n - 1) + fib(n - 2);
+      };`
+    );
+  }, [defaultCode, setCodePrompt]);
 
   function handleOnCopyClick(): void {
-    copy(code);
+    copy(codePrompt);
   }
 
   function handleOnProgramLangChange(language: string): void {
@@ -65,7 +68,7 @@ const fib = (n) => {
 
   function handleOnCodeChange(value: string | undefined): void {
     if (value) {
-      setCode(value);
+      setCodePrompt(value);
     }
   }
 
@@ -98,7 +101,7 @@ const fib = (n) => {
       </div>
       <Editor
         onChange={handleOnCodeChange}
-        defaultValue={code}
+        defaultValue={codePrompt}
         language={selectedProgramLang.label}
         theme="vs-dark"
       />
