@@ -130,8 +130,8 @@ const HistoryPage = () => {
     }
   }, [setModal]);
 
-  const lastWeekDates = getLastWeekHistory(history.concat(historyMock));
-  const previos = getPreviousHistory(history.concat(historyMock));
+  const lastWeekDates = getLastWeekHistory(history);
+  const previos = getPreviousHistory(history);
 
   return (
     <div className="flex">

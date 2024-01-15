@@ -60,8 +60,8 @@ const HeaderComponent = () => {
     <>
       {contextHolder}
       {modal}
-      <header className="flex flex-row w-full select-none text-xl justify-between px-16 py-5 sm:px-5">
-        <nav className="flex flex-row gap-10 text-[18px] items-center sm:gap-2">
+      <header className="flex flex-row w-full select-none text-xl justify-between px-16 py-5 sm:px-5 sm:gap-4">
+        <nav className="flex flex-row gap-10 text-[18px] items-center sm:gap-4">
           {tabs.map((tab) => {
             const isTabSelected = selectedTab === tab.path;
 
@@ -81,7 +81,7 @@ const HeaderComponent = () => {
           })}
         </nav>
         {!localStorage.getItem("token") ? (
-          <div className="flex gap-10 justify-start z-10 sm:gap-5">
+          <div className="flex gap-10 justify-start z-10 sm:gap-4">
             <button
               className={`border-[3px] rounded-full py-2 px-6 font-bold text-[16px] ${styles.login} sm:text-[24px]`}
               onClick={handleOnLoginClick}

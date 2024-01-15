@@ -16,3 +16,9 @@
   --tertiary-hover-color: #ffffffcc;
   --tertiary-active-color: #ffffff;
 }
+
+@media (max-width: 500px) {
+  #root {
+    overflow-y: auto;
+  }
+}

@@ -7,8 +7,7 @@ import {
 import { Select, Input } from "antd";
 import { Sidebar } from "..";
 import { useState } from "react";
-import useStore from "@/store/store";
-import { gptReq } from "@/api/gpt";
+// import useStore from "@/store/store";
 
 type InitialValue = {
   processingType: string[];
@@ -26,7 +25,7 @@ const formInitialValue: InitialValue = {
 
 const MainPageSidebar = () => {
   const [form, setForm] = useState<InitialValue>(formInitialValue);
-  const { codePrompt } = useStore();
+  // const { codePrompt } = useStore();
   const [isError, setIsError] = useState(false);
 
   function handleOnSubmit(event: React.FormEvent<HTMLFormElement>): void {
@@ -43,12 +42,7 @@ const MainPageSidebar = () => {
       }
     }
     if (!isError) {
-      gptReq(
-        form.tone,
-        form.processingType[0],
-        form.programLang,
-        codePrompt
-      ).then((res) => console.log("res", res));
+      // gptReq(form.tone, form.processingType[0], form.programLang, codePrompt).then((res) => console.log("res", res));
       // console.log("form", form);
       // console.log("codePrompt", codePrompt);
       // console.log("form send");
@@ -63,10 +57,10 @@ const MainPageSidebar = () => {
   };
 
   return (
-    <Sidebar className="w-[80%] py-0 px-0">
+    <Sidebar className="w-[80%] py-0 px-0 sm:w-screen">
       <form
         onSubmit={handleOnSubmit}
-        className="h-[calc(100vh-100px)] flex flex-col gap-3 overflow-y-scroll px-8 py-4 "
+        className="flex flex-col gap-3 overflow-y-scroll px-8 py-4 sm:overflow-y-auto sm:p-0"
       >
         <h2 className="font-bold text-2xl text-left">Параметры</h2>
         <button
