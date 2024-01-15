@@ -8,6 +8,8 @@ import { LoginModalComponent, RegistrationModalComponent } from "..";
 import "../../App.css";
 import styles from "./styles.module.css";
 import { LogoutIcon } from "@/icons/LogoutIcon";
+import RegisterIcon from "@/icons/RegisterIcon";
+import LoginIcon from "@/icons/LoginIcon";
 
 const tabs = [
   {
@@ -58,8 +60,8 @@ const HeaderComponent = () => {
     <>
       {contextHolder}
       {modal}
-      <header className="flex flex-row w-full select-none text-xl justify-between px-16 py-5">
-        <nav className="flex flex-row gap-10 text-[18px] items-center ">
+      <header className="flex flex-row w-full select-none text-xl justify-between px-16 py-5 sm:px-5">
+        <nav className="flex flex-row gap-10 text-[18px] items-center sm:gap-2">
           {tabs.map((tab) => {
             const isTabSelected = selectedTab === tab.path;
 
@@ -72,25 +74,31 @@ const HeaderComponent = () => {
                 onClick={handleOnTabClick(tab.path)}
               >
                 <IconWrapper>
-                  {tab.icon} {tab.title}
+                  {tab.icon} <div className="sm:hidden">{tab.title}</div>
                 </IconWrapper>
               </div>
             );
           })}
         </nav>
         {!localStorage.getItem("token") ? (
-          <div className="flex gap-10 justify-start z-10">
+          <div className="flex gap-10 justify-start z-10 sm:gap-5">
             <button
-              className={`border-[3px] rounded-full py-2 px-6 font-bold text-[16px]  ${styles.login}`}
+              className={`border-[3px] rounded-full py-2 px-6 font-bold text-[16px] ${styles.login} sm:text-[24px]`}
               onClick={handleOnLoginClick}
             >
-              Войти
+              <div className="sm:hidden">Войти</div>
+              <div className="hidden sm:block">
+                <LoginIcon />
+              </div>
             </button>
             <button
-              className={`rounded-full py-2 px-6 font-bold text-[16px] ${styles.registration}`}
+              className={`rounded-full py-2 px-6 font-bold text-[16px] ${styles.registration} sm:text-[24px]`}
               onClick={handleOnRegisterClick}
             >
-              Регистрация
+              <div className="sm:hidden">Регистрация</div>
+              <div className="hidden sm:block">
+                <RegisterIcon />
+              </div>
             </button>
           </div>
         ) : (

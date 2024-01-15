@@ -6,7 +6,7 @@ const HomeIcon = () => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="w-6 h-6"
+      className="w-6 h-6 sm:w-10 sm:h-10"
     >
       <path
         strokeLinecap="round"

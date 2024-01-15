@@ -13,6 +13,9 @@ export default {
       tertiaryHoverColor: "#ffffffcc",
       tertiaryActiveColor: "#ffffff",
     },
+    screens: {
+      sm: [{ max: "500px" }],
+    },
   },
   plugins: [],
 };
