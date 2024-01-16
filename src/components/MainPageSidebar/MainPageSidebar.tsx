@@ -57,12 +57,14 @@ const MainPageSidebar = () => {
   };
 
   return (
-    <Sidebar className="w-[80%] py-0 px-0 sm:w-screen">
+    <Sidebar className="w-[80%] py-0 px-0 sm:w-screen sm:h-fit">
       <form
         onSubmit={handleOnSubmit}
-        className="flex flex-col gap-3 overflow-y-scroll px-8 py-4 sm:overflow-y-auto sm:p-0"
+        className="flex flex-col gap-3 overflow-y-scroll px-8 py-4 sm:overflow-y-visible sm:p-0 "
       >
-        <h2 className="font-bold text-2xl text-left">Параметры</h2>
+        <h2 className="font-bold text-2xl text-left sm:text-center sm:text-4xl">
+          Параметры
+        </h2>
         <button
           type="submit"
           title="Начать обработку"

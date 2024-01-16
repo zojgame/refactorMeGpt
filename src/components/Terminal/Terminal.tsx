@@ -100,6 +100,10 @@ function EditableTerminalComponent({
         </div>
       </div>
       <Editor
+        options={{
+          scrollBeyoundLastLine: false,
+          scrollBeyondLastColumn: false,
+        }}
         onChange={handleOnCodeChange}
         defaultValue={codePrompt}
         language={selectedProgramLang.label}
