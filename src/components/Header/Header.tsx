@@ -60,7 +60,7 @@ const HeaderComponent = () => {
     <>
       {contextHolder}
       {modal}
-      <header className="flex flex-row w-full select-none text-xl justify-between px-16 py-5 sm:px-5 sm:gap-4">
+      <header className="flex flex-row w-full select-none text-xl justify-between py-5 px-16  sm:px-5 sm:gap-4">
         <nav className="flex flex-row gap-10 text-[18px] items-center sm:gap-4">
           {tabs.map((tab) => {
             const isTabSelected = selectedTab === tab.path;

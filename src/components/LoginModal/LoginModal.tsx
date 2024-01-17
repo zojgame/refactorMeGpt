@@ -52,9 +52,9 @@ const LoginModalComponent = () => {
   }
 
   return (
-    <div className="block absolute h-[100vh] w-[100vw] z-[50] backdrop-blur-sm ">
+    <div className="block absolute h-[100vh] w-screen z-[50] backdrop-blur-sm">
       <form
-        className="flex flex-col h-fit bg-[#1f2023] gap-8 p-10 rounded-[50px] m-auto w-[500px] absolute z-10 left-[calc(50%-250px)] top-[5%] sm:relative sm:top-0"
+        className="flex flex-col h-fit bg-[#1f2023] gap-8 p-10 rounded-[50px] m-auto w-[500px] absolute z-10 left-[calc(50%-250px)] top-[5%] sm:relative sm:top-0 sm:max-w-full sm:left-0 sm:h-full sm:rounded-none"
         onSubmit={handleOnSubmit}
         ref={formRef}
       >
