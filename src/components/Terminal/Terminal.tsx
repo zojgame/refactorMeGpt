@@ -161,7 +161,10 @@ function ReadonlyTerminalComponent({
       </div>
       <Editor
         theme="vs-dark"
-        options={{ readOnly: true }}
+        options={{
+          readOnly: true,
+          scrollbar: { vertical: "hidden" },
+        }}
         language={selectedProgramLang.label}
         defaultValue={notEditableCode}
       />

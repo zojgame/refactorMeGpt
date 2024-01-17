@@ -60,7 +60,7 @@ const MainPageSidebar = () => {
     <Sidebar className="w-[80%] py-0 px-0 sm:w-screen sm:h-fit">
       <form
         onSubmit={handleOnSubmit}
-        className="flex flex-col gap-3 overflow-y-scroll px-8 py-4 sm:overflow-y-visible sm:p-0 "
+        className="flex flex-col gap-3 overflow-y-scroll px-8 py-4 sm:overflow-y-visible sm:p-0 sm:text-xl"
       >
         <h2 className="font-bold text-2xl text-left sm:text-center sm:text-4xl">
           Параметры

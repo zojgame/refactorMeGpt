@@ -60,9 +60,9 @@ const RegistrationModalComponent = () => {
   useOnClickOutside(formRef, handleCloseModal);
 
   return (
-    <div className="block absolute h-[100vh] w-[100vw]  z-[50] backdrop-blur-sm">
+    <div className="block absolute h-[100vh] w-[100vw] z-[50] backdrop-blur-sm sm:h-auto">
       <form
-        className="flex flex-col h-fit bg-[#1f2023] gap-8 p-10 rounded-[50px] m-auto w-[500px] absolute z-10 left-[calc(50%-250px)] top-[5%]"
+        className="flex flex-col h-fit bg-[#1f2023] gap-8 p-10 rounded-[50px] m-auto w-[500px] absolute z-10 left-[calc(50%-250px)] top-[5%]  sm:h-[100vh] sm:rounded-none"
         onSubmit={handleOnSubmit}
         ref={formRef}
       >
@@ -82,7 +82,7 @@ const RegistrationModalComponent = () => {
         >
           {errorMessage}
         </div>
-        <label>
+        <label className="">
           <input
             onChange={handleOnFieldChange}
             type="text"
@@ -90,14 +90,14 @@ const RegistrationModalComponent = () => {
             className="bg-[#1f2023] border-2 rounded-full p-2 px-5 pt-[10px] w-full"
           />
         </label>
-        <label>
+        <label className="">
           <input
             type="password"
             placeholder="Пароль"
             className="bg-[#1f2023] border-2 rounded-full p-2 px-5 pt-[10px] w-full "
           />
         </label>
-        <label className="mb-5">
+        <label className="mb-5 ">
           <input
             onChange={handleOnFieldChange}
             type="password"
@@ -107,11 +107,11 @@ const RegistrationModalComponent = () => {
         </label>
         <button
           type="submit"
-          className="bg-secondaryColor py-2 px-6 rounded-full text-primaryColor font-semibold hover:bg-secondaryHoverColor active:bg-secondaryColor hover:text-primaryHoverColor active:text-primaryColor"
+          className=" bg-secondaryColor py-2 px-6 rounded-full text-primaryColor font-semibold hover:bg-secondaryHoverColor active:bg-secondaryColor hover:text-primaryHoverColor active:text-primaryColor"
         >
           Зарегистрироваться
         </button>
-        <div className="flex gap-3 font-[12px] justify-center">
+        <div className="flex gap-3 font-[12px] justify-center sm:pl-10">
           <div
             className=" text-gray-400 font-semibold  hover:underline cursor-pointer select-none"
             onClick={onHaveAnAccountClick}
