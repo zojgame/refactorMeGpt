@@ -11,29 +11,6 @@ import useStore from "@/store/store";
 import { HistoryRes } from "@/types";
 import dayjs from "dayjs";
 
-// const historyMock = [
-//   { id: "1", data: "1 feb 2022", programLang: "javascript" },
-//   { id: "2", data: "2 feb 2022", programLang: "c" },
-//   { id: "3", data: "3 feb 2022", programLang: "java" },
-//   { id: "4", data: "4 feb 2022", programLang: "c#" },
-//   { id: "5", data: "4 feb 2022", programLang: "c#" },
-//   { id: "6", data: "4 feb 2022", programLang: "c#" },
-//   { id: "7", data: "4 feb 2022", programLang: "c#" },
-//   { id: "8", data: "4 feb 2022", programLang: "c#" },
-//   { id: "9", data: "3 feb 2022", programLang: "java" },
-//   { id: "10", data: "3 feb 2022", programLang: "java" },
-//   { id: "11", data: "3 feb 2022", programLang: "java" },
-//   { id: "12", data: "3 feb 2022", programLang: "java" },
-//   { id: "13", data: "3 feb 2022", programLang: "java" },
-//   { id: "14", data: "4 feb 2022", programLang: "c#" },
-//   { id: "15", data: "4 feb 2022", programLang: "c#" },
-//   { id: "16", data: "3 feb 2022", programLang: "java" },
-//   { id: "17", data: "3 feb 2022", programLang: "java" },
-//   { id: "18", data: "3 feb 2022", programLang: "java" },
-//   { id: "19", data: "3 feb 2022", programLang: "java" },
-//   { id: "20", data: "3 feb 2022", programLang: "java" },
-// ];
-
 const historyMock: HistoryRes[] = [
   { body: "", dateTimeCreate: "2023.01.13 20:55:46" },
   { body: "", dateTimeCreate: "2024.01.01 20:55:46" },
@@ -77,6 +54,7 @@ const getPreviousHistory = (his: HistoryRes[]) => {
     .filter((date) => {
       const startDate = new Date();
       const endDate = new Date(date.dateTimeCreate);
+      console.log("startDate", startDate);
 
       const timeDifference = startDate.getTime() - endDate.getTime();
 
@@ -130,12 +108,14 @@ const HistoryPage = () => {
     }
   }, [setModal]);
 
-  const lastWeekDates = getLastWeekHistory(history);
-  const previos = getPreviousHistory(history);
+  const lastWeekDates = getLastWeekHistory(historyMock);
+  const previos = getPreviousHistory(historyMock);
+  // const lastWeekDates = getLastWeekHistory(history);
+  // const previos = getPreviousHistory(history);
 
   return (
-    <div className="flex">
-      <Sidebar className="w-[60%] overflow-y-auto flex px-8">
+    <div className="flex sm:flex-col">
+      <Sidebar className="w-[60%] overflow-y-auto flex px-8 sm:w-full ">
         <div className="text-sm text-left text-[#666] font-semibold ">
           Последние 7 дней
         </div>
