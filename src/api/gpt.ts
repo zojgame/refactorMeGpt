@@ -1,3 +1,4 @@
+import { GPTRes } from "@/types";
 import { GPT_REQUEST_API } from "./urls";
 import ky from "ky";
 
@@ -8,7 +9,7 @@ const gptReq = async (
   code: string,
   additional: string = ""
 ) => {
-  const res = await ky
+  const res: GPTRes = await ky
     .post(GPT_REQUEST_API, {
       json: {
         tone: tone,

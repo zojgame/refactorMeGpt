@@ -23,13 +23,24 @@ type HistoryRes = {
   dateTimeCreate: string;
 };
 
-// type GPTRes = {
-//   id: string,
-//   object: string,
-//   created: number,
-//   model: string,
+type Message = {
+  role: string;
+  content: string;
+};
 
-// }
+type Choice = {
+  finish_reason: string;
+  index: number;
+  message: Message;
+};
+
+type GPTRes = {
+  id: string;
+  object: string;
+  created: number;
+  model: string;
+  choices: Choice[];
+};
 
 export type {
   Language,
@@ -37,4 +48,5 @@ export type {
   Selector,
   AuthorizationRes,
   HistoryRes,
+  GPTRes,
 };

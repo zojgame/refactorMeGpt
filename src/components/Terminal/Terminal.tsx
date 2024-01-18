@@ -69,6 +69,7 @@ function EditableTerminalComponent({
   function handleOnCodeChange(value: string | undefined): void {
     if (value) {
       setCodePrompt(value);
+      console.log("codePrompt", codePrompt);
     }
   }
 
@@ -118,21 +119,25 @@ function ReadonlyTerminalComponent({
   title,
 }: EditableTerminalComponentProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const { selectedProgramLang } = useStore();
+  const { selectedProgramLang, codeProcessed, setCodeProcessed } = useStore();
   const [, copy] = useCopyToClipboard();
 
   const notEditableCode =
     defaultCode ??
     `const fib = (n) => {
-  if (n <= 1) {
-    return n;
-  }
+if (n <= 1) {
+  return n;
+}
 
-  return fib(n - 1) + fib(n - 2);
+return fib(n - 1) + fib(n - 2);
 };`;
 
+  // useEffect(() => {
+  //   setCodeProcessed(notEditableCode);
+  // }, []);
+
   function handleOnCopyClick(): void {
-    copy(notEditableCode);
+    copy(codeProcessed);
   }
 
   return (
@@ -166,7 +171,7 @@ function ReadonlyTerminalComponent({
           scrollbar: { vertical: "hidden" },
         }}
         language={selectedProgramLang.label}
-        defaultValue={notEditableCode}
+        defaultValue={codeProcessed}
       />
     </div>
   );

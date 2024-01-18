@@ -7,7 +7,9 @@ import {
 import { Select, Input } from "antd";
 import { Sidebar } from "..";
 import { useState } from "react";
-// import useStore from "@/store/store";
+import useStore from "@/store/store";
+import { gptReq } from "@/api/gpt";
+import { LoadingModal } from "..";
 
 type InitialValue = {
   processingType: string[];
@@ -25,7 +27,7 @@ const formInitialValue: InitialValue = {
 
 const MainPageSidebar = () => {
   const [form, setForm] = useState<InitialValue>(formInitialValue);
-  // const { codePrompt } = useStore();
+  const { codePrompt, setModal, setCodeProcessed } = useStore();
   const [isError, setIsError] = useState(false);
 
   function handleOnSubmit(event: React.FormEvent<HTMLFormElement>): void {
@@ -42,10 +44,13 @@ const MainPageSidebar = () => {
       }
     }
     if (!isError) {
-      // gptReq(form.tone, form.processingType[0], form.programLang, codePrompt).then((res) => console.log("res", res));
-      // console.log("form", form);
-      // console.log("codePrompt", codePrompt);
-      // console.log("form send");
+      setModal(<LoadingModal />);
+      gptReq(form.tone, form.processingType[0], form.programLang, codePrompt)
+        .then((res) => {
+          const codeProcessed = res.choices[0].message.content;
+          setCodeProcessed(`${codeProcessed}`);
+        })
+        .finally(() => setModal(null));
     }
   }
 
