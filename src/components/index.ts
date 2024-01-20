@@ -7,3 +7,4 @@ export { Sidebar } from "./Sidebar/Sidebar";
 export { OptionSelector } from "./OptionSelector/OptionSelector";
 export { LoadingModal } from "./LoadingModal/LoadingModal";
 export { NotAuthModal } from "./NotAuthModal/NotAuthModal";
+export { HistoryTerminal } from "./HistoryTerminal/HistoryTerminal";

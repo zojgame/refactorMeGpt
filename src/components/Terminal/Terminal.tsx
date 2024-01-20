@@ -119,8 +119,12 @@ function ReadonlyTerminalComponent({
   title,
 }: EditableTerminalComponentProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const { selectedProgramLang, codeProcessed } = useStore();
+  const { selectedProgramLang, codeProcessed, setCodeProcessed } = useStore();
   const [, copy] = useCopyToClipboard();
+
+  useEffect(() => {
+    setCodeProcessed(defaultCode ?? ``);
+  }, [defaultCode, setCodeProcessed]);
 
   useEffect(() => {}, [codeProcessed]);
 

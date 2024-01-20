@@ -48,6 +48,13 @@ const processingToneType: Selector[] = [
   { value: "2", label: "Понятный", gptTitle: "Понятнее" },
 ];
 
+const languages = ["javascript", "c", "swift", "typescript", "java"];
+
 //langReqId, langResId, typeId, toneId, adding?, code
 
-export { programmingLanguages, additionalPrompts, processingToneType };
+export {
+  programmingLanguages,
+  additionalPrompts,
+  processingToneType,
+  languages,
+};

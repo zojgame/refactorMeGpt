@@ -19,7 +19,10 @@ type AuthorizationRes = {
 };
 
 type HistoryRes = {
-  body: string;
+  requestCode: string | null;
+  responseCode: string | null;
+  id: number;
+  progLang: string;
   dateTimeCreate: string;
 };
 
