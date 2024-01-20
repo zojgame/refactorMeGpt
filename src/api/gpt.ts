@@ -11,6 +11,7 @@ const gptReq = async (
 ) => {
   const res: GPTRes = await ky
     .post(GPT_REQUEST_API, {
+      timeout: false,
       json: {
         tone: tone,
         type: type,

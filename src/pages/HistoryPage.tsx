@@ -108,10 +108,8 @@ const HistoryPage = () => {
     }
   }, [setModal]);
 
-  const lastWeekDates = getLastWeekHistory(historyMock);
-  const previos = getPreviousHistory(historyMock);
-  // const lastWeekDates = getLastWeekHistory(history);
-  // const previos = getPreviousHistory(history);
+  const lastWeekDates = getLastWeekHistory(history);
+  const previos = getPreviousHistory(history);
 
   return (
     <div className="flex sm:flex-col">

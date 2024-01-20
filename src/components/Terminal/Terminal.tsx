@@ -69,7 +69,6 @@ function EditableTerminalComponent({
   function handleOnCodeChange(value: string | undefined): void {
     if (value) {
       setCodePrompt(value);
-      console.log("codePrompt", codePrompt);
     }
   }
 
@@ -79,6 +78,7 @@ function EditableTerminalComponent({
       onKeyDown={() => textareaRef.current?.focus()}
       onClick={() => textareaRef.current?.focus()}
       className={`relative flex bg-black flex-col h-[calc(100vh-100px)] w-full`}
+      onWheel={(e) => console.log("e", e)}
     >
       <div className="flex justify-between px-4 py-1 h-[55px] items-center border-r border-[#393929] bg-primaryColor">
         {title ? <div className="font-semibold">{title}</div> : <></>}
@@ -102,8 +102,8 @@ function EditableTerminalComponent({
       </div>
       <Editor
         options={{
-          scrollBeyoundLastLine: false,
-          scrollBeyondLastColumn: false,
+          readOnly: false,
+          minimap: { enabled: false },
         }}
         onChange={handleOnCodeChange}
         defaultValue={codePrompt}
@@ -119,22 +119,10 @@ function ReadonlyTerminalComponent({
   title,
 }: EditableTerminalComponentProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const { selectedProgramLang, codeProcessed, setCodeProcessed } = useStore();
+  const { selectedProgramLang, codeProcessed } = useStore();
   const [, copy] = useCopyToClipboard();
 
-  const notEditableCode =
-    defaultCode ??
-    `const fib = (n) => {
-if (n <= 1) {
-  return n;
-}
-
-return fib(n - 1) + fib(n - 2);
-};`;
-
-  // useEffect(() => {
-  //   setCodeProcessed(notEditableCode);
-  // }, []);
+  useEffect(() => {}, [codeProcessed]);
 
   function handleOnCopyClick(): void {
     copy(codeProcessed);
@@ -168,10 +156,10 @@ return fib(n - 1) + fib(n - 2);
         theme="vs-dark"
         options={{
           readOnly: true,
-          scrollbar: { vertical: "hidden" },
+          minimap: { enabled: false },
         }}
         language={selectedProgramLang.label}
-        defaultValue={codeProcessed}
+        value={codeProcessed}
       />
     </div>
   );
