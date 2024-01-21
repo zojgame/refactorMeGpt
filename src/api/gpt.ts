@@ -7,8 +7,28 @@ const gptReq = async (
   type: string,
   languageRequest: string,
   code: string,
-  additional: string = ""
+  additional: string = "",
+  token?: string
 ) => {
+  if (token) {
+    const res: GPTRes = await ky
+      .post(GPT_REQUEST_API, {
+        timeout: false,
+        json: {
+          tone: tone,
+          type: type,
+          code: code,
+          languageRequest: languageRequest,
+          additional: additional,
+        },
+        headers: {
+          Authorization: token,
+        },
+      })
+      .json();
+
+    return res;
+  }
   const res: GPTRes = await ky
     .post(GPT_REQUEST_API, {
       timeout: false,

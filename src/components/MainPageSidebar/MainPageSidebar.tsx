@@ -29,6 +29,7 @@ const MainPageSidebar = () => {
   const [form, setForm] = useState<InitialValue>(formInitialValue);
   const { codePrompt, setModal, setCodeProcessed } = useStore();
   const [isError, setIsError] = useState(false);
+  const token = localStorage.getItem("token");
 
   function handleOnSubmit(event: React.FormEvent<HTMLFormElement>): void {
     event.preventDefault();
@@ -45,12 +46,28 @@ const MainPageSidebar = () => {
     }
     if (!isError) {
       setModal(<LoadingModal />);
-      gptReq(form.tone, form.processingType[0], form.programLang, codePrompt)
-        .then((res) => {
-          const codeProcessed = res.choices[0].message.content;
-          setCodeProcessed(`${codeProcessed}`);
-        })
-        .finally(() => setModal(null));
+      if (token) {
+        gptReq(
+          form.tone,
+          form.processingType[0],
+          form.programLang,
+          codePrompt,
+          "",
+          token
+        )
+          .then((res) => {
+            const codeProcessed = res.choices[0].message.content;
+            setCodeProcessed(`${codeProcessed}`);
+          })
+          .finally(() => setModal(null));
+      } else {
+        gptReq(form.tone, form.processingType[0], form.programLang, codePrompt)
+          .then((res) => {
+            const codeProcessed = res.choices[0].message.content;
+            setCodeProcessed(`${codeProcessed}`);
+          })
+          .finally(() => setModal(null));
+      }
     }
   }
 

@@ -27,7 +27,9 @@ body {
 
 /* custom selector antd */
 
-.css-dev-only-do-not-override-p7e5j5.ant-select:not(.ant-select-customize-input)
+.css-dev-only-do-not-override-1qhpsh8.ant-select:not(
+    .ant-select-customize-input
+  )
   .ant-select-selector,
 .ant-input {
   font-family: "Montserrat", sans-serif;
@@ -40,7 +42,7 @@ body {
   color: rgb(109, 108, 108) !important;
 }
 
-:where(.css-dev-only-do-not-override-p7e5j5).ant-select-single
+:where(.css-dev-only-do-not-override-1qhpsh8).ant-select-single
   .ant-select-selector {
   color: #ffffffde;
   font-weight: 200;
@@ -51,14 +53,14 @@ body {
   font-weight: 200;
 }
 
-:where(.css-dev-only-do-not-override-p7e5j5).ant-select-dropdown
+:where(.css-dev-only-do-not-override-1qhpsh8).ant-select-dropdown
   .ant-select-item,
 .ant-input {
   color: #ffffffde;
   font-weight: 200;
 }
 
-:where(.css-dev-only-do-not-override-p7e5j5).ant-select-dropdown {
+:where(.css-dev-only-do-not-override-1qhpsh8).ant-select-dropdown {
   font-family: "Montserrat", sans-serif;
   background-color: #40414f;
 }
@@ -66,7 +68,7 @@ body {
 .ant-input::placeholder {
   color: grey;
 }
-:where(.css-dev-only-do-not-override-p7e5j5).ant-select-dropdown
+:where(.css-dev-only-do-not-override-1qhpsh8).ant-select-dropdown
   .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
   background-color: #ffffffde;
   font-weight: 700;
@@ -74,39 +76,39 @@ body {
 }
 
 :where(
-    .css-dev-only-do-not-override-p7e5j5
+    .css-dev-only-do-not-override-1qhpsh8
   ).ant-select-single.ant-select-show-arrow
   .ant-select-selection-item,
 :where(
-    .css-dev-only-do-not-override-p7e5j5
+    .css-dev-only-do-not-override-1qhpsh8
   ).ant-select-single.ant-select-show-arrow
   .ant-select-selection-placeholder {
   /* font-weight: 200; */
 }
 
 :where(
-    .css-dev-only-do-not-override-p7e5j5
+    .css-dev-only-do-not-override-1qhpsh8
   ).ant-select-single.ant-select-show-arrow
   .ant-select-selection-item,
 :where(
-    .css-dev-only-do-not-override-p7e5j5
+    .css-dev-only-do-not-override-1qhpsh8
   ).ant-select-single.ant-select-show-arrow
   .ant-select-selection-placeholder {
   color: #ffffffde;
 }
 
-:where(.css-dev-only-do-not-override-p7e5j5).ant-select-multiple
+:where(.css-dev-only-do-not-override-1qhpsh8).ant-select-multiple
   .ant-select-selection-item {
   color: #ffffffde;
 }
 
-:where(.css-dev-only-do-not-override-p7e5j5).ant-select-multiple
+:where(.css-dev-only-do-not-override-1qhpsh8).ant-select-multiple
   .ant-select-selection-item-remove
   svg {
   color: #ffffffde;
 }
 
-:where(.css-dev-only-do-not-override-p7e5j5).ant-select-multiple
+:where(.css-dev-only-do-not-override-1qhpsh8).ant-select-multiple
   .ant-select-selector {
   align-items: start;
   color: #ffffffde;
