@@ -52,7 +52,7 @@ const MainPageSidebar = () => {
           form.processingType[0],
           form.programLang,
           codePrompt,
-          "",
+          form.additional,
           token
         )
           .then((res) => {
@@ -61,7 +61,13 @@ const MainPageSidebar = () => {
           })
           .finally(() => setModal(null));
       } else {
-        gptReq(form.tone, form.processingType[0], form.programLang, codePrompt)
+        gptReq(
+          form.tone,
+          form.processingType[0],
+          form.programLang,
+          codePrompt,
+          form.additional
+        )
           .then((res) => {
             const codeProcessed = res.choices[0].message.content;
             setCodeProcessed(`${codeProcessed}`);

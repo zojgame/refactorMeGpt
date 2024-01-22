@@ -30,6 +30,9 @@ const RegistrationModalComponent = () => {
         setErrorMessage("");
         singUp(username, password)
           .then(() => {
+            if (notificationMessage) {
+              notificationMessage.success("Вы успешно зарегистрировались");
+            }
             setModal(<LoginModalComponent />);
           })
           .catch(() => {

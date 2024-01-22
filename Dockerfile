@@ -1,7 +1,7 @@
 FROM node
 WORKDIR /src
-COPY package.json .
+COPY package.json ./
 RUN npm install
-COPY . .
+COPY . ./src
 EXPOSE 5173
 CMD ["npm", "run", "dev"]

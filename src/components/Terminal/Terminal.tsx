@@ -39,18 +39,7 @@ function EditableTerminalComponent({
   const [, copy] = useCopyToClipboard();
 
   useEffect(() => {
-    setCodePrompt(
-      defaultCode ??
-        `// Вставьте ваш код
-      
-      const fib = (n) => {
-        if (n <= 1) {
-          return n;
-        }
-      
-        return fib(n - 1) + fib(n - 2);
-      };`
-    );
+    setCodePrompt(defaultCode ?? `// Вставьте ваш код`);
   }, [defaultCode, setCodePrompt]);
 
   function handleOnCopyClick(): void {
